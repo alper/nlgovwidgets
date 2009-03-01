@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Rijksoverheid Video Widget</title>
+
+<script type='text/javascript' src='swfobject.js'></script>
+
+<style type="text/css" media="screen">
+	body {
+		padding:0px;
+		margin:0px;
+		background:url(images/bodyBackDark.jpg) top center no-repeat #2c4b65;
+		font-family:Arial, Helvetica, sans-serif;
+	}
+
+	/* IEPNGFIX */
+	img, div {
+		behavior:url(scripts/iepngfix.htc);
+	}
+
+	#header {
+		width:100%;
+		height:68px;
+		background:url(images/headerBack.jpg) top center no-repeat #FFF;
+	}
+
+	#navigation {
+		width:16px;
+		height:15px;
+		margin:0px auto;
+		margin-top:10px;
+		margin-bottom:10px;
+	}
+
+	#content {
+		margin:0px auto;
+		width:237px;
+		margin-top:6px;
+	}
+	/* normal state */
+	#content .contentItem {
+		width:237px;
+		padding-bottom:4px;
+	}
+	#content #contentItemTop {
+		width:237px;
+		height:5px;
+		background:url(images/contentItemTopBack.png) top center no-repeat;	
+	}
+	#content #contentItemMiddle {
+		width:224px;
+
+		min-height:44px;
+		height:auto !important;
+		height:44px;
+
+		padding:0px 8px 0px 5px;
+		background-color:#fff;
+	}
+	#content #contentItemBottom {
+		width:237px;
+		height:5px;
+		background:url(images/contentItemBottomBack.png) top center no-repeat;
+		clear:both;
+	}
+	#content h1 {
+		font-size:12px;
+		color:#000;
+		padding:0px;
+		padding-top:1px;
+		margin:0px;
+		text-decoration:none;
+		font-weight:bold;
+	}
+	#content p {
+		font-size:11px;
+		color:#000;
+		margin:0px;
+		text-decoration:none;
+		font-weight:normal;
+		padding-left:30px;
+	}
+	#content a {
+		text-decoration:none;
+		color:#000;
+	}
+	#content .contentItemIcon {
+		width:58px;
+		height:44px;
+		margin-right:8px;
+		float:left;
+	}
+	#content img {
+		border:none;
+	}
+	/* hover state */
+
+	#content .contentItem:hover h1 {
+		text-decoration:underline;
+	}
+
+	/* VIDEO PLAYER */
+	#video {
+		width:285px;
+		height:auto;
+		margin:0px auto;
+		margin-top:10px;
+	}
+
+	#video #videoTop {
+		width:285px;
+		height:4px;
+		background:url(images/videoTopBack.png) top left no-repeat;
+	}
+
+	#video #videoMiddle {
+		width:273px;
+
+		min-height:32px;
+		height:auto !important;
+		height:32px;
+
+		border-left:1px solid #000;
+		border-right:1px solid #000;
+		padding:0px 5px 5px 5px;
+		background-color:#fff;	
+	}
+
+	#video #videoBottom {
+		width:285px;
+		height:31px;
+		background:url(images/videoBottomBack.png) top left no-repeat;
+	}
+
+	#video #preview {
+		padding-left:1px;
+		padding-top:2px;
+	}
+	#video .videoIconLeft {
+		width:17px;
+		height:18px;
+		float:left;
+		padding-right:10px;
+		padding-top:4px;
+	}
+	#video .videoHeaderMiddle {
+		float:left;
+		padding-bottom:10px;
+	}
+	#video .videoIconRight {
+		width:17px;
+		height:18px;
+		float:right;
+		padding-left:10px;
+		padding-top:4px;
+	}
+	#video h1 {
+		font-size:12px;
+		color:#000;
+		padding:0px;
+		padding-top:1px;
+		margin:0px;
+		text-decoration:none;
+		font-weight:bold;
+	}
+	#video p {
+		font-size:11px;
+		color:#000;
+		margin:0px;
+		text-decoration:none;
+		font-weight:normal;
+	} 
+	#video .button {
+		width:138px;
+		height:24px;
+		font-size:9px;
+		float:left;
+		padding-top:7px;
+		padding-left:4px;
+	}
+	#video .button:hover {
+		text-decoration:underline;
+	}	
+	#video .button img {
+		vertical-align:middle;
+		border:none;
+	}
+	/* footer */
+	#footer {
+		width:281px;
+		height:21px;
+		margin:0px auto;
+		margin-top:4px;
+	}
+	#footer .button {
+		float:right;	
+	}
+	#footer .button img {
+		border:none;
+	}
+</style>
+
+</head>
+
+<body>
+
+<div id="header"></div>
+
+<div id="player">
+	<div id="video">
+	  <div id="videoTop"></div>
+	  <div id="videoMiddle">
+	    <div class="videoIconLeft"><img src="images/previousBtn.jpg" width="17" height="18" /></div>
+
+	    <div class="videoHeaderMiddle">
+	      <h1>The never ending story</h1>
+	      <p>Posted Aug 2008</p>
+	    </div>
+
+	    <div class="videoIconRight"><img src="images/nextBtn.jpg" width="17" height="18" /></div>
+
+	    <div id='preview'>The player will show in this paragraph</div>
+	    <script type='text/javascript'>
+	    var s1 = new SWFObject('player.swf','player','270','215','9');
+	    s1.addParam('allowfullscreen','true');
+	    s1.addParam('allowscriptaccess','always');
+	    s1.addParam('flashvars','file=video.flv');
+	    s1.write('preview');
+	    </script>
+	  </div>
+
+	  <div id="videoBottom">
+	    <div class="button"><img src="images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</div>
+	    <div class="button"><img src="images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube</div>
+	  </div>
+	</div>
+
+	<div id="footer">
+		<a href="widget_regering_video.html"><div class="button"><img src="images/overviewBtn.png" width="78" height="21" /></div></a>
+	</div>
+</div>
+
+<div id="list">
+	<div id="navigation"><img src="images/arrowUp.png" width="16" height="15" /></div>
+	<div id="content"> <a href="widget_regering_video_player.html">
+	  <div class="contentItem">
+	    <div id="contentItemTop"></div>
+	    <div id="contentItemMiddle">
+	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
+	      <h1>The never ending story</h1>
+	      <p>0:18:45</p>
+	    </div>
+	    <div id="contentItemBottom"></div>
+	  </div></a>
+	  <div class="contentItem">
+	    <div id="contentItemTop"></div>
+	    <div id="contentItemMiddle">
+	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
+	      <h1>The never ending story op 2 regels uitgeschreven</h1>
+	      <p>0:18:45</p>
+	    </div>
+	    <div id="contentItemBottom"></div>
+	  </div>
+	  <div class="contentItem">
+	    <div id="contentItemTop"></div>
+	    <div id="contentItemMiddle">
+	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
+	      <h1>The never ending story</h1>
+	      <p>0:18:45</p>
+	    </div>
+	    <div id="contentItemBottom"></div>
+	  </div>
+	  <div class="contentItem">
+	    <div id="contentItemTop"></div>
+	    <div id="contentItemMiddle">
+	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
+	      <h1>The never ending story op 2 regels uitgeschreven</h1>
+	      <p>0:18:45</p>
+	    </div>
+	    <div id="contentItemBottom"></div>
+	  </div>
+	</div>
+	<div id="navigation"><img src="images/arrowDown.png" width="16" height="15" /></div>
+</div>
+
+</body>
+</html>
