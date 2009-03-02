@@ -2,6 +2,16 @@
 <Module>
   <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true" />
   
+  <UserPref name="count" display_name="Aantal vacatures" default_value="3" datatype="enum" >
+    <EnumValue value="3" />
+    <EnumValue value="4" />
+    <EnumValue value="5" />
+    <EnumValue value="6" />
+    <EnumValue value="7" />
+    <EnumValue value="8" />
+    <EnumValue value="9" />
+  </UserPref>
+
   <Content type="html">
   <![CDATA[ 
 <style type="text/css" media="screen">
@@ -148,13 +158,13 @@
 		margin-bottom:4px;
 	}
 
-	#footer #button {
+	#footer .button {
 		width:auto;
 		height:23px;
 		float:right;
 		margin-left:4px;
 	}
-	#footer #button img {
+	#footer .button img {
 		border:none;
 	}
 </style>
@@ -182,33 +192,43 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	gadgets.util.registerOnLoadHandler(function() {
+	var feed = null;
+	
+	gadgets.util.registerOnLoadHandler(function() {	
 		var prefs = new gadgets.Prefs();
-		$('#preffield').html(prefs.getString('myname'));
+		
+		var displayCount = prefs.getInt('count');
+		
+		// TODO need to be either able to resize the window, or turn off the number of items setting
 
-		$('#list').append('<li>item4</li>');
-		$('#button').click(function() {
-			// Do the ajax stuff here
-			var params = {};
-			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+		var params = {};
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
+		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
-			// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
-			var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
+		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
+		var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
+		var url = "http://alper.nl/ajax/widgetproject/dev/vacatures/data.xml";
+		// TODO as soon as the site works again put in the live URL
+		// TODO put in the parameters as settings
+
+		function response(obj) {
+			feed = obj.data;
 			
-			gadgets.io.makeRequest(url, response, params);
-
-			function response(obj) {
-				$('#list').empty();
-
-				var response = obj.data;
-
-				$('#preffield').html('response ' + $("title", response).length);
-
-				$("title", obj.data).each(function(i) {
-					$('#list').append('<li>' + $(this).text() + '</li>');	
-				});
+			$('#jobCount').html(feed.Entry.length);
+			
+			$('#content').empty();
+			
+			for(var index = 0; index < displayCount; index++) {
+				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>Franeker, 06 dec 2008</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				
+				$('#content').append(html);
 			}
-		});
+			
+			gadgets.window.adjustHeight(new Number(650));
+		}
+		
+		gadgets.io.makeRequest(url, response, params);
 	});
 </script>
 
@@ -218,11 +238,11 @@
 
 	<div id="navigation">
 	  <div id="navigationItems">
-	    <div class="navigationItemLeft">23 vacatures</div>
-	    <div class="navigationItemRight"><a href="widgetWbO_vacature_instelling.html">instellingen</a></div>
+	    <div class="navigationItemLeft"><span id="jobCount">23</span> vacatures</div>
+	    <div class="navigationItemRight"><!--<a href="widgetWbO_vacature_instelling.html">instellingen</a>--></div>
 	  </div>
 	</div>
-	<div id="content"> <a href="">
+	<div id="content"> <a href="http://alper.nl" target="_blank">
 	  <div class="contentItem">
 	    <div id="contentItemTop"></div>
 	    <div id="contentItemMiddle">
@@ -266,9 +286,9 @@
 	</div>
 
 	<div id="footer"> <a href="">
-	  <div id="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
+	  <div id="nextButton" class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
 	  </a> <a href="">
-	  <div id="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
+	  <div id="previousButton" class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
 	  </a>
 	</div>
   ]]> 
