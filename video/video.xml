@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Video's van de Rijksoverheid" height="325" scaling="true" />
+  <ModulePrefs title="Rijksoverheidvideo's" height="625" scaling="true" />
   
   <Content type="html">
   <![CDATA[ 
@@ -272,7 +272,7 @@
 
 	    <div id='preview'>The player will show in this paragraph</div>
 	    <script type='text/javascript'>
-	    var s1 = new SWFObject('player.swf','player','270','215','9');
+	    var s1 = new SWFObject('http://alper.nl/ajax/widgetproject/dev/video/player.swf','player','270','215','9');
 	    s1.addParam('allowfullscreen','true');
 	    s1.addParam('allowscriptaccess','always');
 	    s1.addParam('flashvars','file=video.flv');

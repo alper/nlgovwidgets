@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true" />
-  
+  <ModulePrefs title="VWA" height="400" scaling="true">
+		<Require feature="dynamic-height"/>  
+	</ModulePrefs>
+
   <Content type="html">
   <![CDATA[ 
 
@@ -178,7 +180,7 @@
 	#footer {
 		margin:0px auto;
 		width:280px;
-		margin-bottom:4px;
+		margin-bottom:16px;
 		margin-top:4px;
 	}
 	#footer #button {
@@ -217,33 +219,42 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var feed;
+	
 	gadgets.util.registerOnLoadHandler(function() {
-		var prefs = new gadgets.Prefs();
-		$('#preffield').html(prefs.getString('myname'));
+		//var prefs = new gadgets.Prefs();
+		
+		//var displayCount = prefs.getInt('count');
+		
+		// TODO need to be either able to resize the window, or turn off the number of items setting
 
-		$('#list').append('<li>item4</li>');
-		$('#button').click(function() {
-			// Do the ajax stuff here
-			var params = {};
-			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+		var params = {};
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(50);
+		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
-			// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
-			var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
+		var url = "http://www.vwa.nl/pls/feed/cne_content_syndication.feed?channel=10012&context=2001&flavor=rss20";
+
+		function response(obj) {
+			feed = obj.data;
 			
-			gadgets.io.makeRequest(url, response, params);
-
-			function response(obj) {
-				$('#list').empty();
-
-				var response = obj.data;
-
-				$('#preffield').html('response ' + $("title", response).length);
-
-				$("title", obj.data).each(function(i) {
-					$('#list').append('<li>' + $(this).text() + '</li>');	
-				});
+			$('#content').empty();
+			
+			for(var index = 0; index < 5; index++) {
+				var itemDate = new Date(feed.Entry[index].Date*1000);
+				
+				// var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>Franeker, 06 dec 2008</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				
+				// TODO differentiate between warning and recall
+				var html = '<div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg" width="24" height="24" /></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n <div class="dropdownIcon"></div> \n </div> \n <div id="contentItemBottom"></div> \n </div>';
+				
+				$('#content').append(html);
 			}
-		});
+			
+			gadgets.window.adjustHeight();
+		}
+		
+		gadgets.io.makeRequest(url, response, params);
 	});
 </script>
 
@@ -307,8 +318,6 @@
   <div id="button"><img src="images/previousBtn.png" width="78" height="27" /></div>
   </a>
 </div>
-
-
   ]]> 
   </Content>
 </Module>

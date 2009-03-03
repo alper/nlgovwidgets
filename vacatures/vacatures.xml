@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true" />
+  <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true">
+	<Require feature="dynamic-height"/>
+  </ModulePrefs>
   
   <UserPref name="count" display_name="Aantal vacatures" default_value="3" datatype="enum" >
     <EnumValue value="3" />
@@ -11,6 +13,72 @@
     <EnumValue value="8" />
     <EnumValue value="9" />
   </UserPref>
+
+  <UserPref name="regio" display_name="Regio" default_value="" datatype="enum">
+		<EnumValue value="" display_value=""/>
+		<EnumValue value="BRG.02" display_value="Nederland"/>
+		<EnumValue value="BRG.0202" display_value="Friesland"/>
+		<EnumValue value="BRG.0204" display_value="Groningen"/>
+		<EnumValue value="BRG.0206" display_value="Drenthe"/>
+		<EnumValue value="BRG.0208" display_value="Overijssel"/>
+		<EnumValue value="BRG.0210" display_value="Gelderland"/>
+		<EnumValue value="BRG.0212" display_value="Flevoland"/>
+		<EnumValue value="BRG.0214" display_value="Utrecht"/>
+		<EnumValue value="BRG.0216" display_value="Noord-Holland"/>
+		<EnumValue value="BRG.0218" display_value="Zuid-Holland"/>
+		<EnumValue value="BRG.0220" display_value="Zeeland"/>
+		<EnumValue value="BRG.0222" display_value="Noord-Brabant"/>
+		<EnumValue value="BRG.0224" display_value="Limburg"/>
+	</UserPref>
+
+  <UserPref name="opleidingsniveau" display_name="Opleidingsniveau" default_value="" datatype="enum">
+		<EnumValue value="" display_value=""/>
+		<EnumValue value="CWD.02" display_value="Gepromoveerd"/>
+		<EnumValue value="CWD.04" display_value="Master/doctoraal"/>
+		<EnumValue value="CWD.08" display_value="Bachelor – HBO"/>
+		<EnumValue value="CWD.12" display_value="MBO"/>
+		<EnumValue value="CWD.13" display_value="VWO"/>
+		<EnumValue value="CWD.15" display_value="HAVO"/>
+		<EnumValue value="CWD.16" display_value="VMBO / MAVO / LBO"/>
+	</UserPref>
+	
+  <UserPref name="vakgebied" display_name="Vakgebied" default_value="" datatype="enum">
+		<EnumValue value="" display_value=""/>
+		<EnumValue value="CVG.02" display_value="Administratief/Secretarieel"/>
+		<EnumValue value="CVG.04" display_value="Cultureel/taalkundig"/>
+		<EnumValue value="CVG.06" display_value="Financieel/Economisch"/>
+		<EnumValue value="CVG.0602" display_value="Fiscaal"/>
+		<EnumValue value="CVG.0604" display_value="Auditing/Accountancy"/>
+		<EnumValue value="CVG.07" display_value="Telecom"/>
+		<EnumValue value="CVG.08" display_value="ICT"/>
+		<EnumValue value="CVG.09" display_value="Facilitair"/>
+		<EnumValue value="CVG.10" display_value="Juridisch"/>
+		<EnumValue value="CVG.12" display_value="Medisch/verzorging"/>
+		<EnumValue value="CVG.14" display_value="Onderzoek/wetenschap"/>
+		<EnumValue value="CVG.15" display_value="Onderwijs/opleiding"/>
+		<EnumValue value="CVG.1510" display_value="Beroepsonderwijs en volwasseneneducatie"/>
+		<EnumValue value="CVG.1520" display_value="Primair onderwijs"/>
+		<EnumValue value="CVG.1530" display_value="Voortgezet onderwijs"/>
+		<EnumValue value="CVG.1540" display_value="Speciaal onderwijs"/>
+		<EnumValue value="CVG.16" display_value="Opslag/vervoer/logistiek"/>
+		<EnumValue value="CVG.18" display_value="Personeel en organisatie"/>
+		<EnumValue value="CVG.20" display_value="Reclame/communicatie/marketing/PR/voorl."/>
+		<EnumValue value="CVG.22" display_value="Sociaal/maatschappelijk/welzijn"/>
+		<EnumValue value="CVG.2202" display_value="Volkshuisvesting"/>
+		<EnumValue value="CVG.2204" display_value="Sport/recreatie"/>
+		<EnumValue value="CVG.24" display_value="Techniek/productie"/>
+		<EnumValue value="CVG.26" display_value="Inkoop/verkoop"/>
+		<EnumValue value="CVG.2602" display_value="Inkoop"/>
+		<EnumValue value="CVG.2604" display_value="Verkoop"/>
+		<EnumValue value="CVG.27" display_value="Agrarisch"/>
+		<EnumValue value="CVG.28" display_value="Natuur/milieu"/>
+		<EnumValue value="CVG.29" display_value="Stedebouwkundig/ruimtelijke ordening"/>
+		<EnumValue value="CVG.30" display_value="Verkeer/nautisch"/>
+		<EnumValue value="CVG.31" display_value="Orde/vrede/veiligheid"/>
+	</UserPref>
+	
+	<UserPref name="trefwoord" display_name="Trefwoord" default_value="" datatype="string"/>
+
 
   <Content type="html">
   <![CDATA[ 
@@ -192,12 +260,60 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var maanden = {0: 'jan',
+					1: 'feb',
+					2: 'mrt',
+					3: 'apr',
+					4: 'mei',
+					5: 'jun',
+					6: 'jul',
+					7: 'aug',
+					8: 'sep',
+					9: 'okt',
+					10: 'nov',
+					11: 'dec'};
+	
 	var feed = null;
+	
+	var currentPage = 0;
+	var displayCount = 5;
+	var maxPages = 10;
+	
+	function displayPage(feed, page, number) {
+		console.log("currentPage: " + currentPage + ", displayCount: " + displayCount + ", maxPages: " + maxPages + ", page: " + page);
+		
+		$('#content').empty();
+		
+		for(var index = page*number; index  < page*number+number; index++) {
+			if (index < feed.Entry.length) {
+				var summary = feed.Entry[index].Summary;
+			
+				var splits = summary.split(new RegExp("<strong>.+?</strong><br />"));
+				var standPlaatsPart = splits[2];
+				var standPlaats = standPlaatsPart.split('\n')[1];
+				// TODO standplaats could use some stripping
+						
+				var entryDate = new Date(feed.Entry[index].Date);
+				var date = entryDate.getDate() + ' ' + maanden[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
+		
+				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+			
+				$('#content').append(html);
+			}
+	  }
+		currentPage = page;
+			
+		gadgets.window.adjustHeight();	
+	}
 	
 	gadgets.util.registerOnLoadHandler(function() {	
 		var prefs = new gadgets.Prefs();
 		
-		var displayCount = prefs.getInt('count');
+		displayCount = prefs.getInt('count');
+		var regio = prefs.getString('regio');
+		var opleidingsniveau = prefs.getString('opleidingsniveau');
+		var vakgebied = prefs.getString('vakgebied');
+		var trefwoord = prefs.getString('trefwoord');
 		
 		// TODO need to be either able to resize the window, or turn off the number of items setting
 
@@ -207,28 +323,69 @@
 		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
 		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
-		var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
-		var url = "http://alper.nl/ajax/widgetproject/dev/vacatures/data.xml";
+		var url = 'http://www.werkenbijdeoverheid.nl/rss/?vac_regio=' + regio + '&csro_werkdenkniveau=' + opleidingsniveau + '&csro_vakgebied=' + vakgebied + '&fun_naam=' + trefwoord;
+		
+		console.log(url);
+		
+		// var url = "http://alper.nl/ajax/widgetproject/dev/vacatures/data.xml";
 		// TODO as soon as the site works again put in the live URL
+
 		// TODO put in the parameters as settings
+
+		// TODO display the error message if there is one
 
 		function response(obj) {
 			feed = obj.data;
 			
+			// TODO this count always returns 25, why?
 			$('#jobCount').html(feed.Entry.length);
 			
+			// TODO keep into account the modulo remainder
+			maxPages = feed.Entry.length / displayCount;
+			
+			displayPage(feed, 0, displayCount);
+			
+			/*
 			$('#content').empty();
 			
 			for(var index = 0; index < displayCount; index++) {
-				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>Franeker, 06 dec 2008</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				var summary = feed.Entry[index].Summary;
+				
+				
+				var splits = summary.split(new RegExp("<strong>.+?</strong><br />"));
+				var standPlaatsPart = splits[2];
+				var standPlaats = standPlaatsPart.split('\n')[1];
+				// TODO standplaats could use some stripping
+							
+				var entryDate = new Date(feed.Entry[index].Date);
+				var date = entryDate.getDate() + ' ' + maanden[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
+			
+				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
 				
 				$('#content').append(html);
-			}
+			} */
 			
-			gadgets.window.adjustHeight(new Number(650));
+			// gadgets.window.adjustHeight(new Number(650));
+			gadgets.window.adjustHeight();
 		}
 		
 		gadgets.io.makeRequest(url, response, params);
+		
+		$('#nextButton').click(function() {
+			if (currentPage+1 < maxPages) {
+				displayPage(feed, currentPage+1, displayCount);
+			}
+			
+			return false;
+		});
+		
+		$('#previousButton').click(function() {
+			if (currentPage-1 >= 0) {
+				displayPage(feed, currentPage-1, displayCount);
+			}
+			
+			return false;
+		});		
 	});
 </script>
 
@@ -242,6 +399,9 @@
 	    <div class="navigationItemRight"><!--<a href="widgetWbO_vacature_instelling.html">instellingen</a>--></div>
 	  </div>
 	</div>
+	
+	<!-- TODO empty content in favor of a loading screen -->
+	
 	<div id="content"> <a href="http://alper.nl" target="_blank">
 	  <div class="contentItem">
 	    <div id="contentItemTop"></div>
@@ -285,12 +445,13 @@
 	  </a>
 	</div>
 
-	<div id="footer"> <a href="">
-	  <div id="nextButton" class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
-	  </a> <a href="">
+	<div id="footer"> <a href="#" id="nextButton">
+	  <div class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
+	  </a> <a href="#">
 	  <div id="previousButton" class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
 	  </a>
 	</div>
+	<p>&nbsp;</p>
   ]]> 
   </Content>
 </Module>

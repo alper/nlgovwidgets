@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" height="325" scaling="true" />
+  <ModulePrefs title="Agenda van Werken bij de Overheid" height="395" scaling="true" />
   
   <Content type="html">
   <![CDATA[ 
@@ -249,32 +249,43 @@
 
 <script type="text/javascript" charset="utf-8">
 	gadgets.util.registerOnLoadHandler(function() {
-		var prefs = new gadgets.Prefs();
-		$('#preffield').html(prefs.getString('myname'));
+		var date = new Date();
+		$('#yearString').html(date.getFullYear());
+		
+		var params = {};
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
+		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
-		$('#list').append('<li>item4</li>');
-		$('#button').click(function() {
-			// Do the ajax stuff here
-			var params = {};
-			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+		var url = "http://www.werkenbijdeoverheid.nl/rss/agenda.cfm";
+		//var url = "http://alper.nl/ajax/widgetproject/dev/agenda/data.xml";
 
-			// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
-			var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
+		function response(obj) {
+			feed = obj.data;
 			
-			gadgets.io.makeRequest(url, response, params);
-
-			function response(obj) {
-				$('#list').empty();
-
-				var response = obj.data;
-
-				$('#preffield').html('response ' + $("title", response).length);
-
-				$("title", obj.data).each(function(i) {
-					$('#list').append('<li>' + $(this).text() + '</li>');	
-				});
+			$('#jobCount').html(feed.Entry.length);
+			
+			$('#content').empty();
+			
+			/* var keys = [];
+			for (var key in feed.Entry[0]) {
+				keys[keys.length] = key;
 			}
-		});
+			alert(keys);
+			*/
+			
+			for(var index = 0; index < 5; index++) {
+				var itemDate = new Date(feed.Entry[index].Date*1000);
+				
+				// TODO Catch the right date and put that in
+				var html = '<a href=""> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemDate"> \n <div id="contentItemDay">15</div> \n <div id="contentItemMonth">DEC 08</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + feed.Entry[index].Summary.substr(0, 50) + '&hellip;' + itemDate.getDate() + '/' + itemDate.getMonth() + '</p> \n <div class="dropdownIcon"></div> \n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				$('#content').append(html);
+			}
+			
+			// gadgets.window.adjustHeight(new Number(650));
+		}
+		
+		gadgets.io.makeRequest(url, response, params);
 	});
 </script>
 
@@ -285,7 +296,7 @@
 
 <div id="navigation">
   <div id="navigationItems">
-    <div class="navigationItemLeft">Agenda 2008/2009</div>
+    <div class="navigationItemLeft">Agenda <span id="yearString">2008/2009</span></div>
     <div class="navigationItemRight"></div>
   </div>
 </div>
