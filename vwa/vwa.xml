@@ -238,8 +238,6 @@
 		//var prefs = new gadgets.Prefs();
 		
 		//var displayCount = prefs.getInt('count');
-		
-		// TODO need to be either able to resize the window, or turn off the number of items setting
 
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
@@ -258,7 +256,11 @@
 			for(var index = 0; index < 5; index++) {
 				var entry = feed.Entry[index];
 				
-				var itemDate = new Date(entry.Date);
+				var millis = entry.Date * 1000;
+				var itemDate = new Date(millis);
+				
+				console.log(entry.Title);
+				console.log(itemDate);
 				
 				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
 				
@@ -268,7 +270,6 @@
 				
 				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Zie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
-				// TODO differentiate between warning and recall
 				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				
 				$('#content').append(html);
@@ -278,11 +279,16 @@
 				if ( $('.contentFull', this).css('display') == 'none' ) {
 					$('.contentFull', this).css('display', 'block');
 					
-					// TODO fix the expansion of the item
+					$('.dropdownIcon', this).css('display', 'none');
+					
 					$('.contentItemBottom', this).toggleClass('contentItemBottomActive');
 					$('.contentItemBottom', this).toggleClass('contentItemBottom');
 				} else {
 					$('.contentFull', this).css('display', 'none');
+					$('.dropdownIcon', this).css('display', 'block');
+					
+					$('.contentItemBottomActive', this).toggleClass('contentItemBottom');
+					$('.contentItemBottomActive', this).toggleClass('contentItemBottomActive');
 				}
 				gadgets.window.adjustHeight();
 			});
