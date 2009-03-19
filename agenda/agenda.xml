@@ -4,7 +4,6 @@
   
   <Content type="html">
   <![CDATA[ 
-
 <style type="text/css" media="screen">
 	body {
 		padding:0px;
@@ -71,12 +70,12 @@
 		width:279px;
 		padding-bottom:4px;
 	}
-	#content #contentItemTop {
+	#content .contentItemTop {
 		width:279px;
 		height:4px;
 		background:url(images/contentItemTopBack.png) top center no-repeat;	
 	}
-	#content #contentItemMiddle {
+	#content .contentItemMiddle {
 		width:269px;
 
 		min-height:32px;
@@ -88,7 +87,7 @@
 		padding:0px 5px 5px 3px;
 		background-color:#fff1bf;
 	}
-	#content #contentItemBottom {
+	#content .contentItemBottom {
 		width:279px;
 		height:4px;
 		background:url(images/contentItemBottomBack.png) top center no-repeat;
@@ -138,7 +137,7 @@
 		background:url(images/contentItemDateBack.png) top left no-repeat;
 		float:left;
 	}
-	#content .contentItemDate #contentItemDay {
+	#content .contentItemDate .contentItemDay {
 		width:33px;
 		height:auto;
 		color:#5e5e5e;
@@ -149,7 +148,7 @@
 		padding-bottom:1px;
 		text-align:center;
 	}
-	#content .contentItemDate #contentItemMonth {
+	#content .contentItemDate .contentItemMonth {
 		width:33px;
 		color:#fff;
 		font-size:9px;
@@ -157,40 +156,47 @@
 		line-height:9px;
 	}
 	/* hover state */
-	#content .contentItem:hover #contentItemTop {
+	
+	.contentItem:hover .contentItemTop {
 		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
 	}
-	#content .contentItem:hover #contentItemMiddle {
+	
+	.contentItem:hover .contentItemMiddle {
 		border-left:1px solid #404040;
 		border-right:1px solid #404040;
 		background-color:#fff;	
 	}
-	#content .contentItem:hover #contentItemBottom {
+	
+	.contentItem:hover .contentItemBottom {
 		background:url(images/contentItemBottomBackHover.png) top center no-repeat;	
 	}
-	#content .contentItem:hover h1 {
+	
+	.contentItem:hover h1 {
 		text-decoration:underline;
 	}
-	#content .contentItem:hover a {
+	
+	.contentItem:hover a {
 		text-decoration:none;
 	}
-	#content .contentItem:hover .dropdownIcon {
+	
+	.contentItem:hover .dropdownIcon {
 		background:url(images/dropdownIconHover.jpg) top left no-repeat;
 	}
+	
 	/* content item active */
 	#content .contentItemActive {
 		width:279px;
 		padding-bottom:4px;
 	}
-	#content .contentItemActive #contentItemTop {
+	#content .contentItemActive .contentItemTop {
 		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
 	}
-	#content .contentItemActive #contentItemMiddle {
+	#content .contentItemActive .contentItemMiddle {
 		border-left:1px solid #404040;
 		border-right:1px solid #404040;
 		background-color:#fff;
 	}
-	#content .contentItemActive #contentItemBottom {
+	#content .contentItemActive .contentItemBottom {
 		height:18px;
 		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
 	}
@@ -248,6 +254,19 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var maanden = {0: 'JAN',
+					1: 'FEB',
+					2: 'MRT',
+					3: 'APR',
+					4: 'MEI',
+					5: 'JUN',
+					6: 'JUL',
+					7: 'AUG',
+					8: 'SEP',
+					9: 'OKT',
+					10: 'NOV',
+					11: 'DEC'};
+	
 	gadgets.util.registerOnLoadHandler(function() {
 		var date = new Date();
 		$('#yearString').html(date.getFullYear());
@@ -275,10 +294,12 @@
 			*/
 			
 			for(var index = 0; index < 5; index++) {
-				var itemDate = new Date(feed.Entry[index].Date*1000);
+				var entry = feed.Entry[index];
+				
+				var itemDate = new Date(entry.Date);
 				
 				// TODO Catch the right date and put that in
-				var html = '<a href=""> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemDate"> \n <div id="contentItemDay">15</div> \n <div id="contentItemMonth">DEC 08</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + feed.Entry[index].Summary.substr(0, 50) + '&hellip;' + itemDate.getDate() + '/' + itemDate.getMonth() + '</p> \n <div class="dropdownIcon"></div> \n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				var html = '<a href=""> \n <div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + entry.Summary.substr(0, 50) + '&hellip;' + '</p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div> \n </a>';
 				$('#content').append(html);
 			}
 			
@@ -290,9 +311,9 @@
 </script>
 
 
-<div id="header">
+<a href="http://www.werkenbijdeoverheid.nl" target="_blank"><div id="header">
   <div id="headerLogo"></div>
-</div>
+</div></a>
 
 <div id="navigation">
   <div id="navigationItems">
@@ -304,49 +325,49 @@
 <div id="content">
 	<a href="">
   <div class="contentItem">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemDate">
-        <div id="contentItemDay">15</div>
-        <div id="contentItemMonth">DEC 08</div>
+        <div class="contentItemDay">15</div>
+        <div class="contentItemMonth">DEC 08</div>
       </div>
       <h1>Finale Best Graduates Game</h1>
       <p>Korte omschrijving van het evenement lore...</p>
       <div class="dropdownIcon"></div>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
   </a> 
 
 	<a href="">
   <div class="contentItem">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemDate">
-        <div id="contentItemDay">23</div>
-        <div id="contentItemMonth">JAN 08</div>
+        <div class="contentItemDay">23</div>
+        <div class="contentItemMonth">JAN 08</div>
       </div>
       <h1>Finale Best Graduates Game uitgeschreven op 2 regels</h1>
       <p>Korte omschrijving van het evenement lore... Korte omschrijving van het evenement lore... </p>
       <div class="dropdownIcon"></div>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
   </a>
 
   <div class="contentItemActive">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemDate">
-        <div id="contentItemDay">6</div>
-        <div id="contentItemMonth">JAN 08</div>
+        <div class="contentItemDay">6</div>
+        <div class="contentItemMonth">JAN 08</div>
       </div>
       <h1>Finale Best Graduates Game uitgeschreven op 2 regels</h1>
       <p>Korte omschrijving van het evenement lore... Korte omschrijving van het evenement lore... 
       <span class="link"><a href="http://www.diversityworks.com">http://www.diversityworks.com</a></span></p>
       <p><img src="images/agendaBtn.jpg" width="91" height="19" /><img src="images/mailBtn.jpg" width="66" height="19" /></p>
     </div>
-    <a href=""><div id="contentItemBottom"></div> </a>
+    <a href=""><div class="contentItemBottom"></div> </a>
   </div> 
 
 </div>

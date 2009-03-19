@@ -52,12 +52,12 @@
 		width:280px;
 		padding-bottom:4px;
 	}
-	#content #contentItemTop {
+	#content .contentItemTop {
 		width:280px;
 		height:4px;
 		background:url(images/contentItemTopBack.png) top center no-repeat;	
 	}
-	#content #contentItemMiddle {
+	#content .contentItemMiddle {
 		width:270px;
 
 		min-height:32px;
@@ -69,7 +69,7 @@
 		padding:0px 5px 5px 3px;
 		background-color:#fff;
 	}
-	#content #contentItemBottom {
+	#content .contentItemBottom {
 		width:280px;
 		height:4px;
 		background:url(images/contentItemBottomBack.png) top center no-repeat;
@@ -125,15 +125,15 @@
 		float:left;
 	}
 	/* hover state */
-	#content .contentItem:hover #contentItemTop {
+	#content .contentItem:hover .contentItemTop {
 		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
 	}
-	#content .contentItem:hover #contentItemMiddle {
+	#content .contentItem:hover .contentItemMiddle {
 		border-left:1px solid #679ebd;
 		border-right:1px solid #679ebd;
 		background-color:#fff;	
 	}
-	#content .contentItem:hover #contentItemBottom {
+	#content .contentItem:hover .contentItemBottom {
 		background:url(images/contentItemBottomBackHover.png) top center no-repeat;	
 	}
 	#content .contentItem:hover h1 {
@@ -150,20 +150,33 @@
 		width:280px;
 		padding-bottom:4px;
 	}
-	#content .contentItemActive #contentItemTop {
+	#content .contentItemActive .contentItemTop {
 		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
 	}
-	#content .contentItemActive #contentItemMiddle {
+	#content .contentItemActive .contentItemMiddle {
 		border-left:1px solid #679ebd;
 		border-right:1px solid #679ebd;
 		background-color:#fff;
 	}
-	#content .contentItemActive #contentItemBottom {
+	#content .contentItemActive .contentItemBottom {
 		height:18px;
 		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 	#content .contentItemActive h1 {
 		text-decoration:underline;
+	}
+	
+	.contentFull {
+		display: none;
+	}
+	
+	.contentFull A IMG {
+		border: 0;
+	}
+	
+	.contentItemBottomActive {
+		height:18px;
+		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 
 	#content p .link {
@@ -240,16 +253,39 @@
 			
 			$('#content').empty();
 			
+			// TODO implement paging
+			
 			for(var index = 0; index < 5; index++) {
-				var itemDate = new Date(feed.Entry[index].Date*1000);
+				var entry = feed.Entry[index];
 				
-				// var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>Franeker, 06 dec 2008</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				var itemDate = new Date(entry.Date);
+				
+				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
+				
+				if ((entry.Title.match(/terug/i) && entry.Title.match(/haal/i)) || (entry.Summary.match(/terug/i) && entry.Summary.match(/haal/i))) {
+					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
+				}
+				
+				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Zie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
 				// TODO differentiate between warning and recall
-				var html = '<div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg" width="24" height="24" /></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n <div class="dropdownIcon"></div> \n </div> \n <div id="contentItemBottom"></div> \n </div>';
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				
 				$('#content').append(html);
 			}
+			
+			$('.contentItem').click(function() {
+				if ( $('.contentFull', this).css('display') == 'none' ) {
+					$('.contentFull', this).css('display', 'block');
+					
+					// TODO fix the expansion of the item
+					$('.contentItemBottom', this).toggleClass('contentItemBottomActive');
+					$('.contentItemBottom', this).toggleClass('contentItemBottom');
+				} else {
+					$('.contentFull', this).css('display', 'none');
+				}
+				gadgets.window.adjustHeight();
+			});
 			
 			gadgets.window.adjustHeight();
 		}
@@ -267,47 +303,47 @@
 
 <div id="content">
   <div class="contentItem">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemIcon"><img src="images/importantIcon.jpg" width="24" height="24" /></div>
       <h1>Ernstige veiligheidswaarschuwing Glorix O2 met extra woorden</h1>
       <h2>09 dec 2008</h2>
       <div class="dropdownIcon"></div>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
 
   <div class="contentItem">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
       <h1>Dioxine in Iers varkensvlees</h1>
       <h2>09 dec 2008</h2>
       <div class="dropdownIcon"></div>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
 
   <div class="contentItemActive">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
       <h1>Dioxine in Iers varkensvlees</h1>
       <h2>09 dec 2008</h2>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris scelerisque, velit sed mattis dignissim, leo lacus eleifend. <span class="link"><a href="http://www.diversityworks.com">http://www.diversityworks.com</a></span> <img src="images/leesBerichtBtn.jpg" width="140" height="19" /><img src="images/mailBtn.jpg" width="68" height="19" /></p>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
 
   <div class="contentItem">
-    <div id="contentItemTop"></div>
-    <div id="contentItemMiddle">
+    <div class="contentItemTop"></div>
+    <div class="contentItemMiddle">
       <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
       <h1>Dioxine in Iers varkensvlees</h1>
       <h2>09 dec 2008</h2>
       <div class="dropdownIcon"></div>
     </div>
-    <div id="contentItemBottom"></div>
+    <div class="contentItemBottom"></div>
   </div>
 
 </div>
