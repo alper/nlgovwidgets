@@ -232,7 +232,62 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var feed;
+	var feed = null;
+	
+	var currentPage = 0;
+	var displayCount = 5;
+	var maxPages = 10;
+	
+	function displayPage(feed, page, number) {
+		$('#content').empty();
+		
+		for(var index = page*number; index  < page*number+number; index++) {
+			if (index < feed.Entry.length) {
+				var entry = feed.Entry[index];
+				
+				var itemDate = new Date(entry.Date);
+								
+				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
+				
+				if ((entry.Title.match(/terug/i) && entry.Title.match(/haal/i)) || (entry.Summary.match(/terug/i) && entry.Summary.match(/haal/i))) {
+					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
+				}
+				
+				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Zie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
+				
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				
+				$('#content').append(html);
+			}
+		}
+		bindEvents();
+		
+		currentPage = page;
+		
+		gadgets.window.adjustHeight();
+	}
+	
+	// Need to be rebinded because we're creating and recreating elements
+	// May switch to jQuery liveevent
+	function bindEvents() {
+		$('.contentItem').click(function() {
+			if ( $('.contentFull', this).css('display') == 'none' ) {
+				$('.contentFull', this).css('display', 'block');
+				
+				$('.dropdownIcon', this).css('display', 'none');
+				
+				$('.contentItemBottom', this).toggleClass('contentItemBottomActive');
+				$('.contentItemBottom', this).toggleClass('contentItemBottom');
+			} else {
+				$('.contentFull', this).css('display', 'none');
+				$('.dropdownIcon', this).css('display', 'block');
+				
+				$('.contentItemBottomActive', this).toggleClass('contentItemBottom');
+				$('.contentItemBottomActive', this).toggleClass('contentItemBottomActive');
+			}
+			gadgets.window.adjustHeight();
+		});
+	}
 	
 	gadgets.util.registerOnLoadHandler(function() {
 		//var prefs = new gadgets.Prefs();
@@ -249,54 +304,33 @@
 		function response(obj) {
 			feed = obj.data;
 			
+			// TODO keep into account the modulo remainder
+			maxPages = feed.Entry.length / displayCount;
+			
 			$('#content').empty();
-			
-			// TODO implement paging
-			
-			for(var index = 0; index < 5; index++) {
-				var entry = feed.Entry[index];
-				
-				var millis = entry.Date * 1000;
-				var itemDate = new Date(millis);
-				
-				console.log(entry.Title);
-				console.log(itemDate);
-				
-				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
-				
-				if ((entry.Title.match(/terug/i) && entry.Title.match(/haal/i)) || (entry.Summary.match(/terug/i) && entry.Summary.match(/haal/i))) {
-					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
-				}
-				
-				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Zie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
-				
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
-				
-				$('#content').append(html);
-			}
-			
-			$('.contentItem').click(function() {
-				if ( $('.contentFull', this).css('display') == 'none' ) {
-					$('.contentFull', this).css('display', 'block');
-					
-					$('.dropdownIcon', this).css('display', 'none');
-					
-					$('.contentItemBottom', this).toggleClass('contentItemBottomActive');
-					$('.contentItemBottom', this).toggleClass('contentItemBottom');
-				} else {
-					$('.contentFull', this).css('display', 'none');
-					$('.dropdownIcon', this).css('display', 'block');
-					
-					$('.contentItemBottomActive', this).toggleClass('contentItemBottom');
-					$('.contentItemBottomActive', this).toggleClass('contentItemBottomActive');
-				}
-				gadgets.window.adjustHeight();
-			});
+
+			displayPage(feed, 0, displayCount);
 			
 			gadgets.window.adjustHeight();
 		}
 		
 		gadgets.io.makeRequest(url, response, params);
+		
+		$('#nextButton').click(function() {
+			if (currentPage+1 < maxPages) {
+				displayPage(feed, currentPage+1, displayCount);
+			}
+			
+			return false;
+		});
+		
+		$('#previousButton').click(function() {
+			if (currentPage-1 >= 0) {
+				displayPage(feed, currentPage-1, displayCount);
+			}
+			
+			return false;
+		});
 	});
 </script>
 
@@ -354,9 +388,9 @@
 
 </div>
 
-<div id="footer"> <a href="">
+<div id="footer"> <a href="#" id="nextButton">
   <div id="button"><img src="images/nextBtn.png" width="91" height="27" /></div>
-  </a> <a href="">
+  </a> <a href="#" id="previousButton">
   <div id="button"><img src="images/previousBtn.png" width="78" height="27" /></div>
   </a>
 </div>
