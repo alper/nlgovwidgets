@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" height="395" scaling="true" />
+  <ModulePrefs title="Agenda van Werken bij de Overheid" height="395" scaling="true">
+		<Require feature="dynamic-height"/>
+	</ModulePrefs>
   
   <Content type="html">
   <![CDATA[ 
@@ -126,6 +128,10 @@
 		height:5px;
 		background:url(images/dropdownIcon.jpg) top left no-repeat;
 		float:right;
+	}
+	
+	#content .dropdownButtons {
+		display: none;
 	}
 
 	/* date format css */
@@ -299,11 +305,37 @@
 				var itemDate = new Date(entry.Date);
 				
 				// TODO Catch the right date and put that in
-				var html = '<a href=""> \n <div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + entry.Summary.substr(0, 50) + '&hellip;' + '</p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div> \n </a>';
+				var summary = entry.Summary.substr(0, 50);
+				if (summary) {
+					summary += '&hellip;';
+				}
+				
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 			
-			// gadgets.window.adjustHeight(new Number(650));
+			bindEvents();
+			
+			gadgets.window.adjustHeight();
+		}
+		
+		function bindEvents() {
+			$('.contentItem').click(function() {			
+				if ( $(this).hasClass('contentItem') ) {
+					$('.dropdownIcon', this).css('display', 'none');
+					$('.dropdownButtons', this).css('display', 'block');
+				
+					$(this).toggleClass('contentItemActive');
+					$(this).toggleClass('contentItem');
+				} else {
+					$('.dropdownIcon', this).css('display', 'block');
+					$('.dropdownButtons', this).css('display', 'none');
+				
+					$(this).toggleClass('contentItem');
+					$(this).toggleClass('contentItemActive');
+				}
+				gadgets.window.adjustHeight();
+			});
 		}
 		
 		gadgets.io.makeRequest(url, response, params);
