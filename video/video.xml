@@ -243,25 +243,39 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	function switchPlayer() {
+		if ($('#player').css('display') == 'block') {
+			$('#player').css('display', 'none');
+			$('#list').css('display', 'block');
+		} else {
+			$('#player').css('display', 'block');
+			$('#list').css('display', 'none');		
+		}
+	}
+	
 	gadgets.util.registerOnLoadHandler(function() {
 		// Do the ajax stuff here
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 
-		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
-		var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
+		var url = "http://vb2.datiq.net/pub/feeds/streams/overheid/?feed=wDYzS9897zDV4vAgs4KP8314WJusxNTo";
 		
 		gadgets.io.makeRequest(url, response, params);
 
 		function response(obj) {
-			$('#list').empty();
+			$('#content').empty();
 
-			var response = obj.data;
-
-			$('#preffield').html('response ' + $("title", response).length);
-
-			$("title", obj.data).each(function(i) {
-				$('#list').append('<li>' + $(this).text() + '</li>');	
+			$("item", obj.data).each(function() {
+			
+				// Chop of the first part of the duration
+				var duration = $(this).find("[nodeName=rijksoverheidsVideo:duration]").text();
+				if (duration.indexOf('00:') == 0) {
+					duration = duration.substr(3);
+				}
+			
+				var html = '<a href="javascript:switchPlayer()"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div> \n <h1>' + $('title', this).text() + '</h1> \n <p>' + duration + '</p> \n </div> \n <div id="contentItemBottom"></div> \n </div></a>';
+				
+				$('#content').append(html);
 			});
 			
 			gadgets.window.adjustHeight();
@@ -302,13 +316,13 @@
 	</div>
 
 	<div id="footer">
-		<a href="widget_regering_video.html"><div class="button"><img src="images/overviewBtn.png" width="78" height="21" /></div></a>
+		<a href="javascript:switchPlayer();"><div class="button"><img src="images/overviewBtn.png" width="78" height="21" /></div></a>
 	</div>
 </div>
 
 <div id="list">
 	<div id="navigation"><img src="images/arrowUp.png" width="16" height="15" /></div>
-	<div id="content"> <a href="widget_regering_video_player.html">
+	<div id="content"> <a href="javascript:switchPlayer()">
 	  <div class="contentItem">
 	    <div id="contentItemTop"></div>
 	    <div id="contentItemMiddle">

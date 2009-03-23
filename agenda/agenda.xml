@@ -133,6 +133,10 @@
 	#content .dropdownButtons {
 		display: none;
 	}
+	
+	#content .fulltext {
+		display: none;
+	}
 
 	/* date format css */
 	#content .contentItemDate {
@@ -310,7 +314,7 @@
 					summary += '&hellip;';
 				}
 				
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 			
@@ -324,12 +328,18 @@
 				if ( $(this).hasClass('contentItem') ) {
 					$('.dropdownIcon', this).css('display', 'none');
 					$('.dropdownButtons', this).css('display', 'block');
+					
+					$('.summary', this).css('display', 'none');
+					$('.fulltext', this).css('display', 'block');
 				
 					$(this).toggleClass('contentItemActive');
 					$(this).toggleClass('contentItem');
 				} else {
 					$('.dropdownIcon', this).css('display', 'block');
 					$('.dropdownButtons', this).css('display', 'none');
+					
+					$('.summary', this).css('display', 'block');
+					$('.fulltext', this).css('display', 'none');
 				
 					$(this).toggleClass('contentItem');
 					$(this).toggleClass('contentItemActive');
