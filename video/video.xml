@@ -206,6 +206,10 @@
 		display: none;
 	}
 	
+	.navigation {
+		border: none;
+	}
+	
 </style>
 
 
@@ -251,6 +255,51 @@
 			$('#player').css('display', 'block');
 			$('#list').css('display', 'none');		
 		}
+		
+		gadgets.window.adjustHeight();
+	}
+	
+	var data = null;
+	var currentVideo = null;
+	
+	function play(index, autostart) {
+		if (index < 0) { return -1; }
+		if (index >= $('item', data).size()) { return -1; }
+		
+		var item = $("item", data).eq(index);
+		
+		var title = $('title', item).text();
+		var description = $('description', item).text();
+		
+		var date = $('pubDate', item).text();
+		var datepart = date.split(' ')[1] + ' ' + date.split(' ')[2] + ' ' + date.split(' ')[3];
+		
+		var flv = $(item).find("[nodeName=rijksoverheidsVideo:video][type=flv]").text();
+		var qt = $('link', item).text();
+		
+		$('#preview').empty();
+		
+		$('#title').html(title);
+		$('#date').html(datepart);
+		$('#quicktime').attr('href', qt);
+		
+		var s1 = new SWFObject('http://alper.nl/ajax/widgetproject/dev/video/player.swf', 'player', '270', '215', '9');
+    s1.addParam('allowfullscreen','true');
+    s1.addParam('allowscriptaccess','always');
+    s1.addParam('flashvars','file=' + flv + '&autostart=' + autostart);
+    s1.write('preview');
+		
+		currentVideo = index;
+		
+		gadgets.window.adjustHeight();
+	}
+	
+	function previous() {
+		play(currentVideo-1, true);
+	}
+	
+	function next() {
+		play(currentVideo+1, true);
 	}
 	
 	gadgets.util.registerOnLoadHandler(function() {
@@ -258,6 +307,7 @@
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 
+		// TODO put in definitive URL
 		var url = "http://vb2.datiq.net/pub/feeds/streams/overheid/?feed=wDYzS9897zDV4vAgs4KP8314WJusxNTo";
 		
 		gadgets.io.makeRequest(url, response, params);
@@ -265,7 +315,9 @@
 		function response(obj) {
 			$('#content').empty();
 
-			$("item", obj.data).each(function() {
+			data = obj.data;
+
+			$("item", data).each(function(i, val) {
 			
 				// Chop of the first part of the duration
 				var duration = $(this).find("[nodeName=rijksoverheidsVideo:duration]").text();
@@ -273,10 +325,12 @@
 					duration = duration.substr(3);
 				}
 			
-				var html = '<a href="javascript:switchPlayer()"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div> \n <h1>' + $('title', this).text() + '</h1> \n <p>' + duration + '</p> \n </div> \n <div id="contentItemBottom"></div> \n </div></a>';
+				var html = '<a href="javascript:play(' + i + ', true);switchPlayer();"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div> \n <h1>' + $('title', this).text() + '</h1> \n <p>' + duration + '</p> \n </div> \n <div id="contentItemBottom"></div> \n </div></a>';
 				
 				$('#content').append(html);
 			});
+			
+			play(0, false);
 			
 			gadgets.window.adjustHeight();
 		}
@@ -290,14 +344,14 @@
 	<div id="video">
 	  <div id="videoTop"></div>
 	  <div id="videoMiddle">
-	    <div class="videoIconLeft"><img src="images/previousBtn.jpg" width="17" height="18" /></div>
+	    <div class="videoIconLeft"><a href="javascript:previous();"><img class="navigation" src="images/previousBtn.jpg" width="17" height="18" /></a></div>
 
 	    <div class="videoHeaderMiddle">
-	      <h1>The never ending story</h1>
-	      <p>Posted Aug 2008</p>
+	      <h1 id="title">Rijksoverheidsvideo</h1>
+	      <p id="date">Posted Maart 2009</p>
 	    </div>
 
-	    <div class="videoIconRight"><img src="images/nextBtn.jpg" width="17" height="18" /></div>
+	    <div class="videoIconRight"><a href="javascript:next();"><img class="navigation" src="images/nextBtn.jpg" width="17" height="18" /></a></div>
 
 	    <div id="preview">De videospeler zal hier worden weergegeven.</div>
 	    <script type='text/javascript'>
@@ -307,16 +361,18 @@
 	    s1.addParam('flashvars','file=video.flv');
 	    s1.write('preview');
 	    </script>
-	  </div>
+	  	</div>
 
 	  <div id="videoBottom">
-	    <div class="button"><img src="images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</div>
-	    <div class="button"><img src="images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube</div>
+	    <div class="button"><a href="" id="quicktime"><img src="images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</a></div>
+	    <div class="button">
+				<a href="javascript:switchPlayer();"><div class="button"><img src="images/overviewBtn.png" width="78" height="21" /></div></a>
+				<!--<img src="images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube-->
+			</div>
 	  </div>
 	</div>
 
 	<div id="footer">
-		<a href="javascript:switchPlayer();"><div class="button"><img src="images/overviewBtn.png" width="78" height="21" /></div></a>
 	</div>
 </div>
 
@@ -327,7 +383,7 @@
 	    <div id="contentItemTop"></div>
 	    <div id="contentItemMiddle">
 	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
-	      <h1>The never ending story</h1>
+	      <h1>Rijksoverheidsvideo</h1>
 	      <p>0:18:45</p>
 	    </div>
 	    <div id="contentItemBottom"></div>
