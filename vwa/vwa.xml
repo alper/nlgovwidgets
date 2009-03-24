@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
   <ModulePrefs title="VWA" height="400" scaling="true">
-		<Require feature="dynamic-height"/>  
+		<Require feature="dynamic-height"/>
 	</ModulePrefs>
+	
+	<UserPref name="count" display_name="Aantal waarschuwingen" default_value="5" datatype="enum" >
+    <EnumValue value="3" />
+    <EnumValue value="4" />
+    <EnumValue value="5" />
+    <EnumValue value="6" />
+    <EnumValue value="7" />
+    <EnumValue value="8" />
+    <EnumValue value="9" />
+  </UserPref>
 
   <Content type="html">
   <![CDATA[ 
@@ -290,9 +300,11 @@
 	}
 	
 	gadgets.util.registerOnLoadHandler(function() {
-		//var prefs = new gadgets.Prefs();
+		var prefs = new gadgets.Prefs();
 		
-		//var displayCount = prefs.getInt('count');
+		if (prefs.getInt('count')) {
+			displayCount = prefs.getInt('count');
+		}
 
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
