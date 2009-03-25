@@ -4,6 +4,147 @@
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
   
+	<UserPref name="gemeente" display_name="Gemeente" default_value="franeker" datatype="enum">
+		<EnumValue value="aalburg" display_value="Aalburg"/>
+		<EnumValue value="aalten" display_value="Aalten"/>
+		<EnumValue value="albrandswaard" display_value="Albrandswaard"/>
+		<EnumValue value="alphen chaam" display_value="Alphen-Chaam"/>
+		<EnumValue value="ameland" display_value="Ameland"/>
+		<EnumValue value="andijk" display_value="Andijk"/>
+		<EnumValue value="anna paulowna" display_value="Anna Paulowna"/>
+		<EnumValue value="appingedam" display_value="Appingedam"/>
+		<EnumValue value="baarn" display_value="Baarn"/>
+		<EnumValue value="barneveld" display_value="Barneveld"/>
+		<EnumValue value="beek" display_value="Beek"/>
+		<EnumValue value="bergambacht" display_value="Bergambacht"/>
+		<EnumValue value="beverwijk" display_value="Beverwijk"/>
+		<EnumValue value="binnenmaas" display_value="Binnenmaas"/>
+		<EnumValue value="bladel" display_value="Bladel"/>
+		<EnumValue value="bodegraven" display_value="Bodegraven"/>
+		<EnumValue value="boskoop" display_value="Boskoop"/>
+		<EnumValue value="boxtel" display_value="Boxtel"/>
+		<EnumValue value="breukelen" display_value="Breukelen"/>
+		<EnumValue value="brielle" display_value="Brielle"/>
+		<EnumValue value="bussum" display_value="Bussum"/>
+		<EnumValue value="castricum" display_value="Castricum"/>
+		<EnumValue value="culemborg" display_value="Culemborg"/>
+		<EnumValue value="de marne" display_value="De Marne"/>
+		<EnumValue value="diemen" display_value="Diemen"/>
+		<EnumValue value="drimmelen" display_value="Drimmelen"/>
+		<EnumValue value="duiven" display_value="Duiven"/>
+		<EnumValue value="edam volendam" display_value="Edam-Volendam"/>
+		<EnumValue value="eersel" display_value="Eersel"/>
+		<EnumValue value="eijsden" display_value="Eijsden"/>
+		<EnumValue value="enkhuizen" display_value="Enkhuizen"/>
+		<EnumValue value="franeker" display_value="Franeker"/>
+		<EnumValue value="geertruidenberg" display_value="Geertruidenberg"/>
+		<EnumValue value="gilze en rijen" display_value="Gilze en Rijen"/>
+		<EnumValue value="goes" display_value="Goes"/>
+		<EnumValue value="grave" display_value="Grave"/>
+		<EnumValue value="gulpen" display_value="Gulpen"/>
+		<EnumValue value="haaren" display_value="Haaren"/>
+		<EnumValue value="harenkarspel" display_value="Harenkarspel"/>
+		<EnumValue value="harlingen" display_value="Harlingen"/>
+		<EnumValue value="heeze leende" display_value="Heeze-Leende"/>
+		<EnumValue value="heiloo" display_value="Heiloo"/>
+		<EnumValue value="helden" display_value="Helden"/>
+		<EnumValue value="hengelo" display_value="Hengelo"/>
+		<EnumValue value="hilvarenbeek" display_value="Hilvarenbeek"/>
+		<EnumValue value="hoogezand sappemeer" display_value="Hoogezand-Sappemeer"/>
+		<EnumValue value="kampen" display_value="Kampen"/>
+		<EnumValue value="kapelle" display_value="Kapelle"/>
+		<EnumValue value="katwijk" display_value="Katwijk"/>
+		<EnumValue value="kerkrade" display_value="Kerkrade"/>
+		<EnumValue value="korendijk" display_value="Korendijk"/>
+		<EnumValue value="landerd" display_value="Landerd"/>
+		<EnumValue value="lansingerland" display_value="Lansingerland"/>
+		<EnumValue value="laren" display_value="Laren"/>
+		<EnumValue value="leek" display_value="Leek"/>
+		<EnumValue value="lemsterland" display_value="Lemsterland"/>
+		<EnumValue value="leudal" display_value="Leudal"/>
+		<EnumValue value="leusden" display_value="Leusden"/>
+		<EnumValue value="liesveld" display_value="Liesveld"/>
+		<EnumValue value="lingewaard" display_value="Lingewaard"/>
+		<EnumValue value="lisse" display_value="Lisse"/>
+		<EnumValue value="littenseradiel" display_value="Littenseradiel"/>
+		<EnumValue value="lopik" display_value="Lopik"/>
+		<EnumValue value="losser" display_value="Losser"/>
+		<EnumValue value="maasbree" display_value="Maasbree"/>
+		<EnumValue value="maasgouw" display_value="Maasgouw"/>
+		<EnumValue value="maassluis" display_value="Maassluis"/>
+		<EnumValue value="meerssen" display_value="Meerssen"/>
+		<EnumValue value="menterwolde" display_value="Menterwolde"/>
+		<EnumValue value="meppel" display_value="Meppel"/>
+		<EnumValue value="middelharnis" display_value="Middelharnis"/>
+		<EnumValue value="midden delfland" display_value="Midden-Delfland"/>
+		<EnumValue value="mook en middelaar" display_value="Mook en Middelaar"/>
+		<EnumValue value="moordrecht" display_value="Moordrecht"/>
+		<EnumValue value="muiden" display_value="Muiden"/>
+		<EnumValue value="naarden" display_value="Naarden"/>
+		<EnumValue value="neder betuwe" display_value="Neder-Betuwe"/>
+		<EnumValue value="nederlek" display_value="Nederlek"/>
+		<EnumValue value="nederweert" display_value="Nederweert"/>
+		<EnumValue value="nieuw lekkerland" display_value="Nieuw-Lekkerland"/>
+		<EnumValue value="nijefurd" display_value="Nijefurd"/>
+		<EnumValue value="nijkerk" display_value="Nijkerk"/>
+		<EnumValue value="noordwijkerhout" display_value="Noordwijkerhout"/>
+		<EnumValue value="oirschot" display_value="Oirschot"/>
+		<EnumValue value="onderbanken" display_value="Onderbanken"/>
+		<EnumValue value="oostflakkee" display_value="Oostflakkee"/>
+		<EnumValue value="oud beijerland" display_value="Oud-Beijerland"/>
+		<EnumValue value="oudewater" display_value="Oudewater"/>
+		<EnumValue value="pekela" display_value="Pekela"/>
+		<EnumValue value="raalte" display_value="Raalte"/>
+		<EnumValue value="reeuwijk" display_value="Reeuwijk"/>
+		<EnumValue value="reiderland" display_value="Reiderland"/>
+		<EnumValue value="renswoude" display_value="Renswoude"/>
+		<EnumValue value="reusel" display_value="Reusel"/>
+		<EnumValue value="rijnwaarden" display_value="Rijnwaarden"/>
+		<EnumValue value="roerdalen" display_value="Roerdalen"/>
+		<EnumValue value="roermond" display_value="Roermond"/>
+		<EnumValue value="schermer" display_value="Schermer"/>
+		<EnumValue value="scherpenzeel" display_value="Scherpenzeel"/>
+		<EnumValue value="schijndel" display_value="Schijndel"/>
+		<EnumValue value="simpelveld" display_value="Simpelveld"/>
+		<EnumValue value="sint michielsgestel" display_value="Sint-Michielsgestel"/>
+		<EnumValue value="sint oedenrode" display_value="Sint-Oedenrode"/>
+		<EnumValue value="sittard geleen" display_value="Sittard-Geleen"/>
+		<EnumValue value="slochteren" display_value="Slochteren"/>
+		<EnumValue value="smallingerland" display_value="Smallingerland"/>
+		<EnumValue value="sneek" display_value="Sneek"/>
+		<EnumValue value="son en breugel" display_value="Son en Breugel"/>
+		<EnumValue value="staphorst" display_value="Staphorst"/>
+		<EnumValue value="steenwijkerland" display_value="Steenwijkerland"/>
+		<EnumValue value="the hague" display_value="The Hague"/>
+		<EnumValue value="tytsjerksteradiel" display_value="Tytsjerksteradiel"/>
+		<EnumValue value="urk" display_value="Urk"/>
+		<EnumValue value="vaals" display_value="Vaals"/>
+		<EnumValue value="veenendaal" display_value="Veenendaal"/>
+		<EnumValue value="veere" display_value="Veere"/>
+		<EnumValue value="veghel" display_value="Veghel"/>
+		<EnumValue value="veldhoven" display_value="Veldhoven"/>
+		<EnumValue value="vlist" display_value="Vlist"/>
+		<EnumValue value="voerendaal" display_value="Voerendaal"/>
+		<EnumValue value="waddinxveen" display_value="Waddinxveen"/>
+		<EnumValue value="weesp" display_value="Weesp"/>
+		<EnumValue value="werkendam" display_value="Werkendam"/>
+		<EnumValue value="wervershoof" display_value="Wervershoof"/>
+		<EnumValue value="westervoort" display_value="Westervoort"/>
+		<EnumValue value="westvoorne" display_value="Westvoorne"/>
+		<EnumValue value="wieringermeer" display_value="Wieringermeer"/>
+		<EnumValue value="wijk bij duurstede" display_value="Wijk bij Duurstede"/>
+		<EnumValue value="winschoten" display_value="Winschoten"/>
+		<EnumValue value="woerden" display_value="Woerden"/>
+		<EnumValue value="zeevang" display_value="Zeevang"/>
+		<EnumValue value="zeewolde" display_value="Zeewolde"/>
+		<EnumValue value="zevenaar" display_value="Zevenaar"/>
+		<EnumValue value="zevenhuizen moerkapelle" display_value="Zevenhuizen-Moerkapelle"/>
+		<EnumValue value="zijpe" display_value="Zijpe"/>
+		<EnumValue value="zoetermeer" display_value="Zoetermeer"/>
+		<EnumValue value="zoeterwoude" display_value="Zoeterwoude"/>
+		<EnumValue value="zwartewaterland" display_value="Zwartewaterland"/>
+	</UserPref>
+
   <Content type="html">
   <![CDATA[ 
 <style type="text/css" media="screen">
@@ -155,6 +296,10 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var prefs = new gadgets.Prefs();
+	
+	capitalize(prefs.getString('gemeente'));
+	
 	function vergunningenkaart(){
 	    this.width = 320;
 	    this.height = 300;
@@ -173,15 +318,34 @@
 	}
 	vergunningenkaart = new vergunningenkaart();
 	
+	function upperFirst(s) {
+		return s.substr(0, 1).toUpperCase() + s.substr(1, s.length);
+	}
+	
+	function capitalize(s) {
+		var parts = s.split(' ');
+		
+		var result = '';
+		
+		for (var key in parts) {
+			result += upperFirst(parts[key]) + ' ';
+		}
+		
+		return result;
+	}
+	
 	gadgets.util.registerOnLoadHandler(function() {
-		vergunningenkaart.display("roerdalen");
+		vergunningenkaart.display(prefs.getString('gemeente'));
+		
+		$('#gemeente').html(capitalize(prefs.getString('gemeente')));
+		
 		sizes = gadgets.window.adjustHeight();
 	});
 </script>
 	
 <div id="navigation">
 	<div id="right"><a href="widgetBekendmakingen_wijzig.html">wijzig</a></div>
-	<div id="dropdown"><p>Gemeente <strong>Den Haag</strong></p></div>
+	<div id="dropdown"><p>Gemeente <strong id="gemeente">Den Haag</strong></p></div>
 </div>
 
 <div id="map">

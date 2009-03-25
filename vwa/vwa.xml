@@ -263,7 +263,7 @@
 					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
 				}
 				
-				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Zie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
+				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
 				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				
