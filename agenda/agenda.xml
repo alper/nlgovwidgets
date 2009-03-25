@@ -277,6 +277,64 @@
 					10: 'NOV',
 					11: 'DEC'};
 	
+	var feed;
+	
+	var currentPage = 0;
+	var displayCount = 5;
+	var maxPages = 10;
+	
+	function displayPage(feed, page, number) {
+		$('#content').empty();
+		
+		for(var index = page*number; index < page*number+number; index++) {
+			if (index < feed.Entry.length) {
+				var entry = feed.Entry[index];
+
+				var itemDate = new Date(entry.Date);
+
+				// TODO Catch the right date and put that in
+				var summary = entry.Summary.substr(0, 50);
+				if (summary) {
+					summary += '&hellip;';
+				}
+
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				$('#content').append(html);
+			}
+		}
+		
+		bindEvents();
+		
+		currentPage = page;
+		
+		gadgets.window.adjustHeight();
+	}
+	
+	function bindEvents() {
+		$('.contentItem').click(function() {			
+			if ( $(this).hasClass('contentItem') ) {
+				$('.dropdownIcon', this).css('display', 'none');
+				$('.dropdownButtons', this).css('display', 'block');
+				
+				$('.summary', this).css('display', 'none');
+				$('.fulltext', this).css('display', 'block');
+			
+				$(this).toggleClass('contentItemActive');
+				$(this).toggleClass('contentItem');
+			} else {
+				$('.dropdownIcon', this).css('display', 'block');
+				$('.dropdownButtons', this).css('display', 'none');
+				
+				$('.summary', this).css('display', 'block');
+				$('.fulltext', this).css('display', 'none');
+			
+				$(this).toggleClass('contentItem');
+				$(this).toggleClass('contentItemActive');
+			}
+			gadgets.window.adjustHeight();
+		});
+	}
+	
 	gadgets.util.registerOnLoadHandler(function() {
 		var date = new Date();
 		$('#yearString').html(date.getFullYear());
@@ -294,14 +352,10 @@
 			
 			$('#jobCount').html(feed.Entry.length);
 			
-			$('#content').empty();
+			displayPage(feed, currentPage, displayCount);
 			
-			/* var keys = [];
-			for (var key in feed.Entry[0]) {
-				keys[keys.length] = key;
-			}
-			alert(keys);
-			*/
+			/*
+			$('#content').empty();
 			
 			for(var index = 0; index < 5; index++) {
 				var entry = feed.Entry[index];
@@ -321,34 +375,27 @@
 			bindEvents();
 			
 			gadgets.window.adjustHeight();
+			*/
 		}
-		
-		function bindEvents() {
-			$('.contentItem').click(function() {			
-				if ( $(this).hasClass('contentItem') ) {
-					$('.dropdownIcon', this).css('display', 'none');
-					$('.dropdownButtons', this).css('display', 'block');
-					
-					$('.summary', this).css('display', 'none');
-					$('.fulltext', this).css('display', 'block');
 				
-					$(this).toggleClass('contentItemActive');
-					$(this).toggleClass('contentItem');
-				} else {
-					$('.dropdownIcon', this).css('display', 'block');
-					$('.dropdownButtons', this).css('display', 'none');
-					
-					$('.summary', this).css('display', 'block');
-					$('.fulltext', this).css('display', 'none');
-				
-					$(this).toggleClass('contentItem');
-					$(this).toggleClass('contentItemActive');
-				}
-				gadgets.window.adjustHeight();
-			});
-		}
-		
 		gadgets.io.makeRequest(url, response, params);
+		
+		$('#nextButton').click(function() {
+			if (currentPage+1 < maxPages) {
+				displayPage(feed, currentPage+1, displayCount);
+			}
+			
+			return false;
+		});
+		
+		$('#previousButton').click(function() {
+			if (currentPage-1 >= 0) {
+				displayPage(feed, currentPage-1, displayCount);
+			}
+			
+			return false;
+		});
+		
 	});
 </script>
 
@@ -414,10 +461,10 @@
 
 </div>
 
-<div id="footer"> <a href="">
-  <div id="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
-  </a> <a href="">
-  <div id="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
+<div id="footer"> <a href="#">
+  <div id="nextButton"><img src="images/nextBtn.png" width="78" height="23" /></div>
+  </a> <a href="#">
+  <div id="previousButton"><img src="images/previousBtn.png" width="63" height="23" /></div>
   </a>
 </div>
   ]]> 
