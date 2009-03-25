@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Zoekdienst Bekendmakingen" height="325" scaling="true" />
+  <ModulePrefs title="Zoekdienst Bekendmakingen" height="325" scaling="true">
+		<Require feature="dynamic-height"/>
+	</ModulePrefs>
   
   <Content type="html">
   <![CDATA[ 
@@ -153,35 +155,27 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	function vergunningenkaart(){
+	    this.width = 320;
+	    this.height = 300;
+
+	    this.display = function(sPlaatsnaam){
+	        var p = escape(document.location.href);
+	        var rfr = escape(document.referrer);
+	        if (rfr == "undefined"){ 
+	            rfr = "";
+	        }
+	        var sHTML    = '<iframe style="float:none;margin:2px;" frameborder="0" ';
+	        sHTML       += 'src="http://www.vergunningenkaart.nl/MapMaker/' + sPlaatsnaam +'&location=' + p + '&rfr=' + rfr + '" ';
+	        sHTML       += 'width="' + this.width + 'px" height="' + this.height + 'px"></iframe>';
+	        document.getElementById('map').innerHTML = sHTML;
+	    }
+	}
+	vergunningenkaart = new vergunningenkaart();
+	
 	gadgets.util.registerOnLoadHandler(function() {
-		
-		/*
-		var prefs = new gadgets.Prefs();
-		$('#preffield').html(prefs.getString('myname'));
-
-		$('#list').append('<li>item4</li>');
-		$('#button').click(function() {
-			// Do the ajax stuff here
-			var params = {};
-			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-
-			var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
-			
-			gadgets.io.makeRequest(url, response, params);
-
-			function response(obj) {
-				$('#list').empty();
-
-				var response = obj.data;
-
-				$('#preffield').html('response ' + $("title", response).length);
-
-				$("title", obj.data).each(function(i) {
-					$('#list').append('<li>' + $(this).text() + '</li>');	
-				});
-			}
-		});
-		*/
+		vergunningenkaart.display("roerdalen");
+		sizes = gadgets.window.adjustHeight();
 	});
 </script>
 	
@@ -191,12 +185,6 @@
 </div>
 
 <div id="map">
-	<script src="http://www.vergunningenkaart.nl/js/embed.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	vergunningenkaart.width = 475; 
-	vergunningenkaart.height = 400; 
-	vergunningenkaart.display("roerdalen");
-	</script>
 </div>
 
   ]]> 
