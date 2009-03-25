@@ -1,161 +1,132 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true" />
+  <ModulePrefs title="Zoekdienst Bekendmakingen" height="325" scaling="true" />
   
   <Content type="html">
   <![CDATA[ 
 <style type="text/css" media="screen">
-	body {
+	html, body {
+		background-color:#fff;
+		margin:0px;
 		padding:0px;
-		margin:0px;	
+		height:100%;
 		font-family:Arial, Helvetica, sans-serif;
-		font-size:12px;
-		background:url(images/bodyBack.jpg) #ffd300 repeat-x center bottom fixed;
 	}
+	#map {
+		height:auto !important; /* real browsers */
+		height:100%; /* IE6: treaded as min-height*/
+		min-height:100%; /* real browsers */
 
-	/* IEPNGFIX */
-	img, div {
-		behavior:url(scripts/iepngfix.htc);
+		width:100%;
+		background-color:#ffe6ed;
+		z-index:0;
+
+		margin-top: 18px;
 	}
-
+	#map iframe {
+		height:600px;
+		margin-top:68px;
+	}
 	#header {
 		width:100%;
-		height:54px;
-		background:url(images/headerBack.jpg) top left repeat-x;
+		height:48px;
+		background-color:#FFF;
+		position:absolute;
+		top:0px;
+		left:0px;
+		z-index:1;
 	}
-	#headerLogo {
-		margin:0px auto;
-		width:227px;
-		height:54px;
-		background:url(images/header.jpg) top left no-repeat;
-	}
-
 	#navigation {
 		width:100%;
 		height:20px;
-		background-color:#FFF;
-		color:#333;
+		background-color:#cc003d;
+		position:absolute;
+		top:0px;
+		left:0px;
+		z-index:1;
 	}
-	#navigationItems {
-		margin:0px auto;
-		width:295px;
-	}
-	.navigationItemLeft {
-		float:left;
-		width:181px;
-		height:14px;
-		background-color:#ffd300;
-		padding-top:6px;
-		padding-left:14px;
-		font-weight:bold;
-	}
-	.navigationItemRight {
-		float:left;
-		height:15px;
-		width:98px;
-		text-align:center;
+	#navigation #right {
+		width:50%;
+		height:17px;
+		background-color:#cc003d;
+		/*z-index:2;
+		float:right;*/
+		position:absolute;
+		top:0px;
+		right:0px;
+		color:#FFF;
+		text-align:right;
+		padding-right:4px;
+		font-size:11px;
+		font-weight:normal;
 		padding-top:3px;
 	}
-	.navigationItemRight a {
-		color:#333;
+	#navigation #right a {
+		color:#FFF;
 		text-decoration:underline;
 	}
-
-	#content {
-		margin:0px auto;
-		width:279px;
-		margin-top:6px;
-	}
-	/* normal state */
-	#content .contentItem {
-		width:279px;
-		padding-bottom:4px;
-	}
-	#content .contentItem #contentItemTop {
-		width:279px;
-		height:4px;
-		background:url(images/contentItemTopBack.png) top center no-repeat;	
-	}
-	#content .contentItem #contentItemMiddle {
-		width:264px;
+	#navigation #dropdown {
+		width:215px;
 		height:auto;
-		border-left:1px solid #b9b891;
-		border-right:1px solid #b9b891;
-		padding:2px 5px 2px 8px;
-		background-color:#fff1bf;	
-	}
-	#content .contentItem #contentItemBottom {
-		width:279px;
-		height:4px;
-		background:url(images/contentItemBottomBack.png) top center no-repeat;	
-	}
-	#content .contentItem h1 {
-		font-size:12px;
-		color:#000;
-		padding:0px;
-		margin:0px;
-		text-decoration:none;
-	}	
-	#content .contentItem p {
-		font-size:10px;
-		color:#6a6a5a;
-		padding:0px;
-		margin:0px;
-		text-decoration:none;
-		font-weight:normal;
-	}
-	#content a {
-		text-decoration:none;
-	}
-	#content .contentItem .externIcon {
-		width:7px;
-		height:7px;
-		background:url(images/externIcon.jpg) top left no-repeat;
-		float:right;
-	}
-	/* hover state */
-	#content .contentItem:hover #contentItemTop {
-		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
-	}
-	#content .contentItem:hover #contentItemMiddle {
-		border-left:1px solid #404040;
-		border-right:1px solid #404040;
-		background-color:#fff;	
-	}
-	#content .contentItem:hover #contentItemBottom {
-		background:url(images/contentItemBottomBackHover.png) top center no-repeat;	
-	}
-	#content .contentItem:hover h1 {
-		text-decoration:underline;
-	}
-	#content .contentItem:hover a {
-		text-decoration:none;
-	}
-	#content .contentItem:hover .externIcon {
-		background:url(images/externIconHover.jpg) top left no-repeat;
-	}
-
-	/* instellingen menu */
-	#content .contentItem select {
-		margin-top:4px;
-		width:100%;
-		font-size:11px;
-	}
-
-	#footer {
+		background-color:#cc003d;
 		margin:0px auto;
-		width:279px;
-		margin-bottom:4px;
+		font-size:12px;
+		color:#FFF;
+		margin-top:20px;
+		/*padding-bottom:6px;*/
+		position:relative;
+		top:-20px;
+		clear:both;
+	}
+	#navigation #dropdown p {
+		padding:4px 8px 0px 8px;
+		margin:0px;
+	}
+	#navigation #dropdown select {
+		width:200px;	
+	}
+	strong {
+		font-weight:bold;
 	}
 
-	#footer #button {
-		width:auto;
-		height:23px;
-		float:right;
-		margin-left:4px;
+	/* settings panel */
+	#settings {
+		width:215px;
+		height:auto;
+		margin:0px auto;
+		padding-top:106px;
 	}
-	#footer #button img {
-		border:none;
+	#settings h1 {
+		font-size:12px;
+		font-weight:bold;
+		margin:0px;
+		padding:0px;
+		margin-bottom:6px;
+	}
+	#settings p {
+		font-size:12px;
+		font-weight:normal;
+		margin:0px;
+		padding:0px;
+		margin-bottom:3px;
+	}
+	#settings p input {
+		padding:2px;
+		margin:0px;
+		margin-right:6px;
+		margin-bottom:6px;	
+		width:205px;
+	}
+	#settings .radio {
+		width:12px;
+		margin-bottom:0px;
+	}
+	#settings #button {
+		height:23px;
+		width:auto;
+		float:right;
+		margin:0px;
+		margin-top:6px;
 	}
 </style>
 
@@ -183,6 +154,8 @@
 
 <script type="text/javascript" charset="utf-8">
 	gadgets.util.registerOnLoadHandler(function() {
+		
+		/*
 		var prefs = new gadgets.Prefs();
 		$('#preffield').html(prefs.getString('myname'));
 
@@ -192,7 +165,6 @@
 			var params = {};
 			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 
-			// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
 			var url = "http://www.werkenbijdeoverheid.nl/rss/?vac_regio=&csro_werkdenkniveau=&csro_vakgebied=&fun_naam=docent";
 			
 			gadgets.io.makeRequest(url, response, params);
@@ -209,68 +181,24 @@
 				});
 			}
 		});
+		*/
 	});
 </script>
+	
+<div id="navigation">
+	<div id="right"><a href="widgetBekendmakingen_wijzig.html">wijzig</a></div>
+	<div id="dropdown"><p>Gemeente <strong>Den Haag</strong></p></div>
+</div>
 
-	<div id="header">
-	  <div id="headerLogo"></div>
-	</div>
+<div id="map">
+	<script src="http://www.vergunningenkaart.nl/js/embed.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	vergunningenkaart.width = 475; 
+	vergunningenkaart.height = 400; 
+	vergunningenkaart.display("roerdalen");
+	</script>
+</div>
 
-	<div id="navigation">
-	  <div id="navigationItems">
-	    <div class="navigationItemLeft">23 vacatures</div>
-	    <div class="navigationItemRight"><a href="widgetWbO_vacature_instelling.html">instellingen</a></div>
-	  </div>
-	</div>
-	<div id="content"> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Junior securityspecialist</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Adviseur/onderzoeker Informatiebeveiling (software) (m/v)</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Junior securityspecialist</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Adviseur/onderzoeker Informatiebeveiling (software) (m/v)</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a>
-	</div>
-
-	<div id="footer"> <a href="">
-	  <div id="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
-	  </a> <a href="">
-	  <div id="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
-	  </a>
-	</div>
   ]]> 
   </Content>
 </Module>
