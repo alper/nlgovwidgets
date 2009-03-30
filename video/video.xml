@@ -27,7 +27,7 @@
 		background:url(images/headerBack.jpg) top center no-repeat #FFF;
 	}
 
-	#navigation {
+	#list .navigation {
 		width:16px;
 		height:15px;
 		margin:0px auto;
@@ -45,12 +45,12 @@
 		width:237px;
 		padding-bottom:4px;
 	}
-	#content #contentItemTop {
+	#content .contentItemTop {
 		width:237px;
 		height:5px;
 		background:url(images/contentItemTopBack.png) top center no-repeat;	
 	}
-	#content #contentItemMiddle {
+	#content .contentItemMiddle {
 		width:224px;
 
 		min-height:44px;
@@ -60,7 +60,7 @@
 		padding:0px 8px 0px 5px;
 		background-color:#fff;
 	}
-	#content #contentItemBottom {
+	#content .contentItemBottom {
 		width:237px;
 		height:5px;
 		background:url(images/contentItemBottomBack.png) top center no-repeat;
@@ -206,7 +206,7 @@
 		display: none;
 	}
 	
-	.navigation {
+	.navigation, .navigation IMG {
 		border: none;
 	}
 	
@@ -255,12 +255,14 @@
 			$('#player').css('display', 'block');
 			$('#list').css('display', 'none');		
 		}
-		
-		gadgets.window.adjustHeight();
 	}
 	
 	var data = null;
 	var currentVideo = null;
+	
+	var numberToShow = 4;
+	var numberOfVideos = 0;
+	var startPointer = 0;
 	
 	function play(index, autostart) {
 		if (index < 0) { return -1; }
@@ -290,8 +292,6 @@
     s1.write('preview');
 		
 		currentVideo = index;
-		
-		gadgets.window.adjustHeight();
 	}
 	
 	function previous() {
@@ -303,7 +303,29 @@
 	}
 	
 	gadgets.util.registerOnLoadHandler(function() {
-		// Do the ajax stuff here
+		$('#upVideo').click(function() {
+			console.log('start pointer ' + startPointer);
+			
+			if (startPointer > 0) {
+				$('#video_' + (startPointer-1)).css('display', 'inline');
+				$('#video_' + (startPointer+numberToShow-1)).css('display', 'none');
+			
+				startPointer -= 1;
+			}
+		});
+		
+		$('#downVideo').click(function() {
+			console.log('start pointer ' + startPointer + ' number ' + numberOfVideos);
+			
+			if (startPointer < numberOfVideos - numberToShow) {
+				$('#video_' + startPointer).css('display', 'none');
+				$('#video_' + (startPointer+numberToShow)).css('display', 'block');
+			
+				startPointer += 1;
+			}
+		});
+	
+
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 
@@ -324,10 +346,17 @@
 				if (duration.indexOf('00:') == 0) {
 					duration = duration.substr(3);
 				}
+				
+				if (i >= numberToShow) {
+					var display = "display: none;"
+				} else {
+					var display = "display: inline;"
+				}
 			
-				var html = '<a href="javascript:play(' + i + ', true);switchPlayer();"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div> \n <h1>' + $('title', this).text() + '</h1> \n <p>' + duration + '</p> \n </div> \n <div id="contentItemBottom"></div> \n </div></a>';
+				var html = '<a id="video_' + i + '" style="' + display + '" href="javascript:play(' + i + ', true);switchPlayer();"> \n <div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div> \n <h1>' + $('title', this).text() + '</h1> \n <p>' + duration + '</p> \n </div> \n <div class="contentItemBottom"></div> \n </div></a>';
 				
 				$('#content').append(html);
+				numberOfVideos += 1;
 			});
 			
 			play(0, false);
@@ -377,46 +406,13 @@
 </div>
 
 <div id="list">
-	<div id="navigation"><img src="images/arrowUp.png" width="16" height="15" /></div>
-	<div id="content"> <a href="javascript:switchPlayer()">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
-	      <h1>Rijksoverheidsvideo</h1>
-	      <p>0:18:45</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div></a>
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
-	      <h1>The never ending story op 2 regels uitgeschreven</h1>
-	      <p>0:18:45</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
-	      <h1>The never ending story</h1>
-	      <p>0:18:45</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="contentItemIcon"><img src="images/contentItemIcon.jpg" width="58" height="44" /></div>
-	      <h1>The never ending story op 2 regels uitgeschreven</h1>
-	      <p>0:18:45</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
+	<a href="#" id="upVideo"><div class="navigation"><img src="images/arrowUp.png" width="16" height="15" /></div></a>
+	
+	<div id="content">
+		<p>Gegevens ophalen&hellip;</p>
 	</div>
-	<div id="navigation"><img src="images/arrowDown.png" width="16" height="15" /></div>
+	
+	<a href="#" id="downVideo"><div class="navigation"><img src="images/arrowDown.png" width="16" height="15" /></div></a>
 </div>
 
   ]]> 
