@@ -298,7 +298,7 @@
 <script type="text/javascript" charset="utf-8">
 	var prefs = new gadgets.Prefs();
 	
-	function vergunningenkaart(){
+	function vergunningenkaart() {
 	    this.width = 320;
 	    this.height = 300;
 
@@ -315,6 +315,10 @@
 	    }
 	}
 	var vergunningenkaart = new vergunningenkaart();
+	
+	if (gadgets.window && gadgets.window.getViewportDimensions()) {
+		vergunningenkaart.width = gadgets.window.getViewportDimensions()['width'];
+	}
 	
 	function upperFirst(s) {
 		return s.substr(0, 1).toUpperCase() + s.substr(1, s.length);
