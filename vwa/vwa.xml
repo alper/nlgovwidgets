@@ -313,7 +313,7 @@
 
 		var url = "http://www.vwa.nl/pls/feed/cne_content_syndication.feed?channel=10012&context=2001&flavor=rss20";
 
-		function response(obj) {
+		function response(obj) {		
 			feed = obj.data;
 			
 			// TODO keep into account the modulo remainder

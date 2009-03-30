@@ -298,8 +298,6 @@
 <script type="text/javascript" charset="utf-8">
 	var prefs = new gadgets.Prefs();
 	
-	capitalize(prefs.getString('gemeente'));
-	
 	function vergunningenkaart(){
 	    this.width = 320;
 	    this.height = 300;
@@ -316,7 +314,7 @@
 	        document.getElementById('map').innerHTML = sHTML;
 	    }
 	}
-	vergunningenkaart = new vergunningenkaart();
+	var vergunningenkaart = new vergunningenkaart();
 	
 	function upperFirst(s) {
 		return s.substr(0, 1).toUpperCase() + s.substr(1, s.length);
@@ -339,16 +337,166 @@
 		
 		$('#gemeente').html(capitalize(prefs.getString('gemeente')));
 		
+		if (prefs.getString('gemeente')) {
+			$('#gemeenteselect').val(prefs.getString('gemeente'));
+		}
+		
+		$('#gemeenteselect').change(function() {
+			vergunningenkaart.display($('#gemeenteselect').val());
+			
+			prefs.set('gemeente', $('#gemeenteselect').val());
+		});
+		
 		sizes = gadgets.window.adjustHeight();
 	});
 </script>
 	
 <div id="navigation">
-	<div id="right"><a href="widgetBekendmakingen_wijzig.html">wijzig</a></div>
-	<div id="dropdown"><p>Gemeente <strong id="gemeente">Den Haag</strong></p></div>
+	<div id="dropdown"><p>Gemeente
+		<select id="gemeenteselect" style="width: 10em; height: 0.5em;">
+			<option value="aalburg">Aalburg</option>
+			<option value="aalten">Aalten</option>
+			<option value="albrandswaard">Albrandswaard</option>
+			<option value="alphen chaam">Alphen-Chaam</option>
+			<option value="ameland">Ameland</option>
+			<option value="andijk">Andijk</option>
+			<option value="anna paulowna">Anna Paulowna</option>
+			<option value="appingedam">Appingedam</option>
+			<option value="baarn">Baarn</option>
+			<option value="barneveld">Barneveld</option>
+			<option value="beek">Beek</option>
+			<option value="bergambacht">Bergambacht</option>
+			<option value="beverwijk">Beverwijk</option>
+			<option value="binnenmaas">Binnenmaas</option>
+			<option value="bladel">Bladel</option>
+			<option value="bodegraven">Bodegraven</option>
+			<option value="boskoop">Boskoop</option>
+			<option value="boxtel">Boxtel</option>
+			<option value="breukelen">Breukelen</option>
+			<option value="brielle">Brielle</option>
+			<option value="bussum">Bussum</option>
+			<option value="castricum">Castricum</option>
+			<option value="culemborg">Culemborg</option>
+			<option value="de marne">De Marne</option>
+			<option value="diemen">Diemen</option>
+			<option value="drimmelen">Drimmelen</option>
+			<option value="duiven">Duiven</option>
+			<option value="edam volendam">Edam-Volendam</option>
+			<option value="eersel">Eersel</option>
+			<option value="eijsden">Eijsden</option>
+			<option value="enkhuizen">Enkhuizen</option>
+			<option value="franeker">Franeker</option>
+			<option value="geertruidenberg">Geertruidenberg</option>
+			<option value="gilze en rijen">Gilze en Rijen</option>
+			<option value="goes">Goes</option>
+			<option value="grave">Grave</option>
+			<option value="gulpen">Gulpen</option>
+			<option value="haaren">Haaren</option>
+			<option value="harenkarspel">Harenkarspel</option>
+			<option value="harlingen">Harlingen</option>
+			<option value="heeze leende">Heeze-Leende</option>
+			<option value="heiloo">Heiloo</option>
+			<option value="helden">Helden</option>
+			<option value="hengelo">Hengelo</option>
+			<option value="hilvarenbeek">Hilvarenbeek</option>
+			<option value="hoogezand sappemeer">Hoogezand-Sappemeer</option>
+			<option value="kampen">Kampen</option>
+			<option value="kapelle">Kapelle</option>
+			<option value="katwijk">Katwijk</option>
+			<option value="kerkrade">Kerkrade</option>
+			<option value="korendijk">Korendijk</option>
+			<option value="landerd">Landerd</option>
+			<option value="lansingerland">Lansingerland</option>
+			<option value="laren">Laren</option>
+			<option value="leek">Leek</option>
+			<option value="lemsterland">Lemsterland</option>
+			<option value="leudal">Leudal</option>
+			<option value="leusden">Leusden</option>
+			<option value="liesveld">Liesveld</option>
+			<option value="lingewaard">Lingewaard</option>
+			<option value="lisse">Lisse</option>
+			<option value="littenseradiel">Littenseradiel</option>
+			<option value="lopik">Lopik</option>
+			<option value="losser">Losser</option>
+			<option value="maasbree">Maasbree</option>
+			<option value="maasgouw">Maasgouw</option>
+			<option value="maassluis">Maassluis</option>
+			<option value="meerssen">Meerssen</option>
+			<option value="menterwolde">Menterwolde</option>
+			<option value="meppel">Meppel</option>
+			<option value="middelharnis">Middelharnis</option>
+			<option value="midden delfland">Midden-Delfland</option>
+			<option value="mook en middelaar">Mook en Middelaar</option>
+			<option value="moordrecht">Moordrecht</option>
+			<option value="muiden">Muiden</option>
+			<option value="naarden">Naarden</option>
+			<option value="neder betuwe">Neder-Betuwe</option>
+			<option value="nederlek">Nederlek</option>
+			<option value="nederweert">Nederweert</option>
+			<option value="nieuw lekkerland">Nieuw-Lekkerland</option>
+			<option value="nijefurd">Nijefurd</option>
+			<option value="nijkerk">Nijkerk</option>
+			<option value="noordwijkerhout">Noordwijkerhout</option>
+			<option value="oirschot">Oirschot</option>
+			<option value="onderbanken">Onderbanken</option>
+			<option value="oostflakkee">Oostflakkee</option>
+			<option value="oud beijerland">Oud-Beijerland</option>
+			<option value="oudewater">Oudewater</option>
+			<option value="pekela">Pekela</option>
+			<option value="raalte">Raalte</option>
+			<option value="reeuwijk">Reeuwijk</option>
+			<option value="reiderland">Reiderland</option>
+			<option value="renswoude">Renswoude</option>
+			<option value="reusel">Reusel</option>
+			<option value="rijnwaarden">Rijnwaarden</option>
+			<option value="roerdalen">Roerdalen</option>
+			<option value="roermond">Roermond</option>
+			<option value="schermer">Schermer</option>
+			<option value="scherpenzeel">Scherpenzeel</option>
+			<option value="schijndel">Schijndel</option>
+			<option value="simpelveld">Simpelveld</option>
+			<option value="sint michielsgestel">Sint-Michielsgestel</option>
+			<option value="sint oedenrode">Sint-Oedenrode</option>
+			<option value="sittard geleen">Sittard-Geleen</option>
+			<option value="slochteren">Slochteren</option>
+			<option value="smallingerland">Smallingerland</option>
+			<option value="sneek">Sneek</option>
+			<option value="son en breugel">Son en Breugel</option>
+			<option value="staphorst">Staphorst</option>
+			<option value="steenwijkerland">Steenwijkerland</option>
+			<option value="the hague">The Hague</option>
+			<option value="tytsjerksteradiel">Tytsjerksteradiel</option>
+			<option value="urk">Urk</option>
+			<option value="vaals">Vaals</option>
+			<option value="veenendaal">Veenendaal</option>
+			<option value="veere">Veere</option>
+			<option value="veghel">Veghel</option>
+			<option value="veldhoven">Veldhoven</option>
+			<option value="vlist">Vlist</option>
+			<option value="voerendaal">Voerendaal</option>
+			<option value="waddinxveen">Waddinxveen</option>
+			<option value="weesp">Weesp</option>
+			<option value="werkendam">Werkendam</option>
+			<option value="wervershoof">Wervershoof</option>
+			<option value="westervoort">Westervoort</option>
+			<option value="westvoorne">Westvoorne</option>
+			<option value="wieringermeer">Wieringermeer</option>
+			<option value="wijk bij duurstede">Wijk bij Duurstede</option>
+			<option value="winschoten">Winschoten</option>
+			<option value="woerden">Woerden</option>
+			<option value="zeevang">Zeevang</option>
+			<option value="zeewolde">Zeewolde</option>
+			<option value="zevenaar">Zevenaar</option>
+			<option value="zevenhuizen moerkapelle">Zevenhuizen-Moerkapelle</option>
+			<option value="zijpe">Zijpe</option>
+			<option value="zoetermeer">Zoetermeer</option>
+			<option value="zoeterwoude">Zoeterwoude</option>
+			<option value="zwartewaterland">Zwartewaterland</option>
+		</select>
+	<!--<strong id="gemeente">Den Haag</strong></p>--></div>
 </div>
 
-<div id="map">
+<div id="map" style="text-align: center;">
 </div>
 
   ]]> 
