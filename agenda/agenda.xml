@@ -227,19 +227,20 @@
 		padding-top:8px;
 		padding-bottom:4px;
 	}
+
 	#footer {
 		margin:0px auto;
 		width:279px;
 		margin-bottom:4px;
 	}
 
-	#footer #button {
+	#footer .button {
 		width:auto;
 		height:23px;
 		float:right;
 		margin-left:4px;
 	}
-	#footer #button img {
+	#footer .button img {
 		border:none;
 	}
 </style>
@@ -399,12 +400,13 @@
 	<p>Gegevens aan het ophalen&hellip;</p>
 </div>
 
-<div id="footer"> <a href="#">
-  <div id="nextButton"><img src="images/nextBtn.png" width="78" height="23" /></div>
-  </a> <a href="#">
-  <div id="previousButton"><img src="images/previousBtn.png" width="63" height="23" /></div>
+<div id="footer"> <a href="#" id="nextButton">
+  <div class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
+  </a> <a href="#" id="previousButton">
+  <div class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
   </a>
 </div>
+<p>&nbsp;</p>
   ]]> 
   </Content>
 </Module>

@@ -387,8 +387,8 @@
 
 	<div id="footer"> <a href="#" id="nextButton">
 	  <div class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
-	  </a> <a href="#">
-	  <div id="previousButton" class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
+	  </a> <a href="#" id="previousButton">
+	  <div class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
 	  </a>
 	</div>
 	<p>&nbsp;</p>
