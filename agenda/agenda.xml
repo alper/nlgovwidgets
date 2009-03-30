@@ -134,6 +134,10 @@
 		display: none;
 	}
 	
+	.dropdownButtons IMG {
+		border: none;
+	}
+	
 	#content .fulltext {
 		display: none;
 	}
@@ -298,7 +302,10 @@
 					summary += '&hellip;';
 				}
 
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				var mailSubject = itemDate.getDate() + ' '  + maanden[itemDate.getMonth()] + ': ' + entry.Title;
+				var mailBody = encodeURI(entry.Summary);
+
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + entry.Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 		}
@@ -353,29 +360,6 @@
 			$('#jobCount').html(feed.Entry.length);
 			
 			displayPage(feed, currentPage, displayCount);
-			
-			/*
-			$('#content').empty();
-			
-			for(var index = 0; index < 5; index++) {
-				var entry = feed.Entry[index];
-				
-				var itemDate = new Date(entry.Date);
-				
-				// TODO Catch the right date and put that in
-				var summary = entry.Summary.substr(0, 50);
-				if (summary) {
-					summary += '&hellip;';
-				}
-				
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
-				$('#content').append(html);
-			}
-			
-			bindEvents();
-			
-			gadgets.window.adjustHeight();
-			*/
 		}
 				
 		gadgets.io.makeRequest(url, response, params);
@@ -412,53 +396,7 @@
 </div>
 
 <div id="content">
-	<a href="">
-  <div class="contentItem">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemDate">
-        <div class="contentItemDay">15</div>
-        <div class="contentItemMonth">DEC 08</div>
-      </div>
-      <h1>Finale Best Graduates Game</h1>
-      <p>Korte omschrijving van het evenement lore...</p>
-      <div class="dropdownIcon"></div>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-  </a> 
-
-	<a href="">
-  <div class="contentItem">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemDate">
-        <div class="contentItemDay">23</div>
-        <div class="contentItemMonth">JAN 08</div>
-      </div>
-      <h1>Finale Best Graduates Game uitgeschreven op 2 regels</h1>
-      <p>Korte omschrijving van het evenement lore... Korte omschrijving van het evenement lore... </p>
-      <div class="dropdownIcon"></div>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-  </a>
-
-  <div class="contentItemActive">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemDate">
-        <div class="contentItemDay">6</div>
-        <div class="contentItemMonth">JAN 08</div>
-      </div>
-      <h1>Finale Best Graduates Game uitgeschreven op 2 regels</h1>
-      <p>Korte omschrijving van het evenement lore... Korte omschrijving van het evenement lore... 
-      <span class="link"><a href="http://www.diversityworks.com">http://www.diversityworks.com</a></span></p>
-      <p><img src="images/agendaBtn.jpg" width="91" height="19" /><img src="images/mailBtn.jpg" width="66" height="19" /></p>
-    </div>
-    <a href=""><div class="contentItemBottom"></div> </a>
-  </div> 
-
+	<p>Gegevens aan het ophalen&hellip;</p>
 </div>
 
 <div id="footer"> <a href="#">
