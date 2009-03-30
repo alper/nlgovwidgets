@@ -286,17 +286,19 @@
 		
 		for(var index = page*number; index  < page*number+number; index++) {
 			if (index < feed.Entry.length) {
-				var summary = feed.Entry[index].Summary;
+				var entry = feed.Entry[index];
+				
+				var summary = entry.Summary;
 			
 				var splits = summary.split(new RegExp("<strong>.+?</strong><br />"));
 				var standPlaatsPart = splits[2];
 				var standPlaats = standPlaatsPart.split('\n')[1];
 				// TODO standplaats could use some stripping
 						
-				var entryDate = new Date(feed.Entry[index].Date);
+				var entryDate = new Date(entry.Date);
 				var date = entryDate.getDate() + ' ' + maanden[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
 		
-				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				var html = '<a href="' + entry.Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + entry.Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
 			
 				$('#content').append(html);
 			}
@@ -345,27 +347,6 @@
 			
 			displayPage(feed, 0, displayCount);
 			
-			/*
-			$('#content').empty();
-			
-			for(var index = 0; index < displayCount; index++) {
-				var summary = feed.Entry[index].Summary;
-				
-				
-				var splits = summary.split(new RegExp("<strong>.+?</strong><br />"));
-				var standPlaatsPart = splits[2];
-				var standPlaats = standPlaatsPart.split('\n')[1];
-				// TODO standplaats could use some stripping
-							
-				var entryDate = new Date(feed.Entry[index].Date);
-				var date = entryDate.getDate() + ' ' + maanden[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
-			
-				var html = '<a href="' + feed.Entry[index].Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + feed.Entry[index].Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
-				
-				$('#content').append(html);
-			} */
-			
-			// gadgets.window.adjustHeight(new Number(650));
 			gadgets.window.adjustHeight();
 		}
 		
@@ -400,49 +381,8 @@
 	  </div>
 	</div>
 	
-	<!-- TODO empty content in favor of a loading screen -->
-	
-	<div id="content"> <a href="http://alper.nl" target="_blank">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Junior securityspecialist</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Adviseur/onderzoeker Informatiebeveiling (software) (m/v)</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Junior securityspecialist</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a> <a href="">
-	  <div class="contentItem">
-	    <div id="contentItemTop"></div>
-	    <div id="contentItemMiddle">
-	      <div class="externIcon"></div>
-	      <h1>Adviseur/onderzoeker Informatiebeveiling (software) (m/v)</h1>
-	      <p>Franeker, 06 dec 2008</p>
-	    </div>
-	    <div id="contentItemBottom"></div>
-	  </div>
-	  </a>
+	<div id="content">
+		<p>Gegevens ophalen&hellip;</p>
 	</div>
 
 	<div id="footer"> <a href="#" id="nextButton">
