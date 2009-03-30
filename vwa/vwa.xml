@@ -313,7 +313,7 @@
 
 		var url = "http://www.vwa.nl/pls/feed/cne_content_syndication.feed?channel=10012&context=2001&flavor=rss20";
 
-		function response(obj) {		
+		function response(obj) {
 			feed = obj.data;
 			
 			// TODO keep into account the modulo remainder
@@ -354,50 +354,7 @@
 </div>
 
 <div id="content">
-  <div class="contentItem">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemIcon"><img src="images/importantIcon.jpg" width="24" height="24" /></div>
-      <h1>Ernstige veiligheidswaarschuwing Glorix O2 met extra woorden</h1>
-      <h2>09 dec 2008</h2>
-      <div class="dropdownIcon"></div>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-
-  <div class="contentItem">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
-      <h1>Dioxine in Iers varkensvlees</h1>
-      <h2>09 dec 2008</h2>
-      <div class="dropdownIcon"></div>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-
-  <div class="contentItemActive">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
-      <h1>Dioxine in Iers varkensvlees</h1>
-      <h2>09 dec 2008</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris scelerisque, velit sed mattis dignissim, leo lacus eleifend. <span class="link"><a href="http://www.diversityworks.com">http://www.diversityworks.com</a></span> <img src="images/leesBerichtBtn.jpg" width="140" height="19" /><img src="images/mailBtn.jpg" width="68" height="19" /></p>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-
-  <div class="contentItem">
-    <div class="contentItemTop"></div>
-    <div class="contentItemMiddle">
-      <div class="contentItemIcon"><img src="images/terughaalIcon.jpg" width="24" height="24" /></div>
-      <h1>Dioxine in Iers varkensvlees</h1>
-      <h2>09 dec 2008</h2>
-      <div class="dropdownIcon"></div>
-    </div>
-    <div class="contentItemBottom"></div>
-  </div>
-
+	<p>Gegevens ophalen&hellip;</p>
 </div>
 
 <div id="footer"> <a href="#" id="nextButton">
