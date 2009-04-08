@@ -16,7 +16,6 @@
 
   <Content type="html">
   <![CDATA[ 
-
 <style type="text/css" media="screen">
 	body {
 		padding:0px;
@@ -53,10 +52,11 @@
 
 
 	#content {
-		margin:0px auto;
+		margin: 6px auto 0;
 		width:280px;
 		margin-top:6px;
 	}
+	
 	/* normal state */
 	#content .contentItem {
 		width:280px;
@@ -265,7 +265,7 @@
 				
 				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemIcon"><img src="' + icon + '" width="24" height="24" /></div> \n <h1>' + entry.Title + '</h1> \n <h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2> \n ' + fullText + ' <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + entry.Title + '</h1><h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
 				
 				$('#content').append(html);
 			}

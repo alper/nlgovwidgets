@@ -2,6 +2,7 @@
 <Module>
   <ModulePrefs title="Zoekdienst Bekendmakingen" height="325" scaling="true">
 		<Require feature="dynamic-height"/>
+		<Require feature="setprefs"/>
 	</ModulePrefs>
   
 	<UserPref name="gemeente" display_name="Gemeente" default_value="franeker" datatype="enum">
@@ -296,8 +297,6 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var prefs = new gadgets.Prefs();
-	
 	function vergunningenkaart() {
 	    this.width = 320;
 	    this.height = 300;
@@ -337,6 +336,8 @@
 	}
 	
 	gadgets.util.registerOnLoadHandler(function() {
+		var prefs = new gadgets.Prefs();
+		
 		vergunningenkaart.display(prefs.getString('gemeente'));
 		
 		$('#gemeente').html(capitalize(prefs.getString('gemeente')));
