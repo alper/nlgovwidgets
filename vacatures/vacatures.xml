@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Vacatures van Werken bij de Overheid" height="325" scaling="true">
-	<Require feature="dynamic-height"/>
+  <ModulePrefs title="Vacatures van Werken bij de Overheid" title_url="" description="" author="" author_email="" screenshot="" thumbnail="" height="325" scaling="true">
+		<Require feature="dynamic-height"/>
+		<Locale lang="nl" country="nl" />
   </ModulePrefs>
   
   <UserPref name="count" display_name="Aantal vacatures" default_value="3" datatype="enum" >

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Zoekdienst Bekendmakingen" height="325" scaling="true">
+  <ModulePrefs title="Zoekdienst Bekendmakingen" title_url="" description="" author="Alper Çugun" author_email="" screenshot="http://alper.nl/ajax/widgetproject/dev/bekendmakingen/screenshot.png" thumbnail="" height="325" scaling="true">
+		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>
 	</ModulePrefs>

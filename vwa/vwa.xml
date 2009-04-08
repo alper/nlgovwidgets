@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="VWA" height="400" scaling="true">
-		<Require feature="dynamic-height"/>
+  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/vwa/screenshot.png" thumbnail="" height="400" scaling="true">
+		<Locale lang="nl" country="nl" />
+		<Require feature="dynamic-height" />
 	</ModulePrefs>
 	
 	<UserPref name="count" display_name="Aantal waarschuwingen" default_value="5" datatype="enum" >

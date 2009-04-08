@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" height="395" scaling="true">
+  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="" description="" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/agenda/screenshot.png" thumbnail="" height="395" scaling="true">
+		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
   
@@ -297,7 +298,6 @@
 
 				var itemDate = new Date(entry.Date);
 
-				// TODO Catch the right date and put that in
 				var summary = entry.Summary.substr(0, 50);
 				if (summary) {
 					summary += '&hellip;';
@@ -305,6 +305,9 @@
 
 				var mailSubject = itemDate.getDate() + ' '  + maanden[itemDate.getMonth()] + ': ' + entry.Title;
 				var mailBody = encodeURI(entry.Summary);
+
+				// TODO create add to agenda functionality, like this:
+				// http://alper.nl/cgi-bin/icsgen.py?title=Test&date=2009-4-5&location=Hier%20en%20daar
 
 				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + entry.Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);

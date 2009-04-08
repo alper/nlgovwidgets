@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Rijksoverheidvideo's" height="425" scaling="true">
+  <ModulePrefs title="Rijksoverheidvideo's" title_url="" description="" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/video/screenshot.png" thumbnail="" height="425" scaling="true">
+		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="flash"/>
 	</ModulePrefs>
