@@ -242,6 +242,19 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var maanden = {0: 'jan',
+					1: 'feb',
+					2: 'mrt',
+					3: 'apr',
+					4: 'mei',
+					5: 'jun',
+					6: 'jul',
+					7: 'aug',
+					8: 'sep',
+					9: 'okt',
+					10: 'nov',
+					11: 'dec'};
+	
 	var feed = null;
 	
 	var currentPage = 0;
@@ -265,7 +278,7 @@
 				
 				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
-				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + entry.Title + '</h1><h2>' + itemDate.getDate() + ' dec ' + itemDate.getFullYear() + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
+				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + entry.Title + '</h1><h2>' + itemDate.getDate() + ' ' + maanden[itemDate.getMonth()] + ' ' + itemDate.getFullYear() + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
 				
 				$('#content').append(html);
 			}
