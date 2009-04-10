@@ -243,18 +243,18 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var maanden = {0: 'jan',
-					1: 'feb',
-					2: 'mrt',
-					3: 'apr',
-					4: 'mei',
-					5: 'jun',
-					6: 'jul',
-					7: 'aug',
-					8: 'sep',
-					9: 'okt',
-					10: 'nov',
-					11: 'dec'};
+	var maanden = {'Jan': 'jan',
+					'Feb': 'feb',
+					'Mar': 'mrt',
+					'Apr': 'apr',
+					'May': 'mei',
+					'Jun': 'jun',
+					'Jul': 'jul',
+					'Aug': 'aug',
+					'Sep': 'sep',
+					'Oct': 'okt',
+					'Nov': 'nov',
+					'Dec': 'dec'};
 	
 	var feed = null;
 	
@@ -266,20 +266,31 @@
 		$('#content').empty();
 		
 		for(var index = page*number; index  < page*number+number; index++) {
-			if (index < feed.Entry.length) {
-				var entry = feed.Entry[index];
+			if (index < $("item", feed).size()) {
+				var entry = $("item", feed).get(index);
 				
+				// alert($("pubDate", entry).text());
+				
+				var title = $("title", entry).text();
+				var description = $("description", entry).text();
+				var link = $("link", entry).text();
+				
+				var date = $("pubDate", entry).text();
+				var day = date.split(" ")[1];
+				var englishMonth = date.split(" ")[2];
+				var year = date.split(" ")[3];
+								
 				var itemDate = new Date(entry.Date);
 								
 				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
 				
-				if ((entry.Title.match(/terug/i) && entry.Title.match(/haal/i)) || (entry.Summary.match(/terug/i) && entry.Summary.match(/haal/i))) {
+				if ((title.match(/terug/i) && title.match(/haal/i)) || (description.match(/terug/i) && description.match(/haal/i))) {
 					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
 				}
 				
-				var fullText = '<p class="contentFull">' + entry.Summary.substr(0, 120) + '&hellip;<a href="' + entry.Link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + entry.Title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + entry.Link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
+				var fullText = '<p class="contentFull">' + description.substr(0, 120) + '&hellip;<a href="' + link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
-				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + entry.Title + '</h1><h2>' + itemDate.getDate() + ' ' + maanden[itemDate.getMonth()] + ' ' + itemDate.getFullYear() + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
+				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + title + '</h1><h2>' + day + ' ' + maanden[englishMonth] + ' ' + year + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
 				
 				$('#content').append(html);
 			}
@@ -321,7 +332,7 @@
 		}
 
 		var params = {};
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(50);
 		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
@@ -331,7 +342,7 @@
 			feed = obj.data;
 			
 			// TODO keep into account the modulo remainder
-			maxPages = feed.Entry.length / displayCount;
+			maxPages = $("item", feed).size() / displayCount;
 			
 			$('#content').empty();
 

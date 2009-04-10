@@ -341,7 +341,6 @@
 			data = obj.data;
 
 			$("item", data).each(function(i, val) {
-			
 				// Chop of the first part of the duration
 				var duration = $(this).find("[nodeName=rijksoverheidsVideo:duration]").text();
 				if (duration.indexOf('00:') == 0) {
