@@ -270,18 +270,18 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var maanden = {0: 'JAN',
-					1: 'FEB',
-					2: 'MRT',
-					3: 'APR',
-					4: 'MEI',
-					5: 'JUN',
-					6: 'JUL',
-					7: 'AUG',
-					8: 'SEP',
-					9: 'OKT',
-					10: 'NOV',
-					11: 'DEC'};
+	var maanden = {'Jan': 'JAN',
+					'Feb': 'FEB',
+					'Mar': 'MRT',
+					'Apr': 'APR',
+					'May': 'MEI',
+					'Jun': 'JUN',
+					'Jul': 'JUL',
+					'Aug': 'AUG',
+					'Sep': 'SEP',
+					'Oct': 'OKT',
+					'Nov': 'NOV',
+					'Dec': 'DEC'};
 	
 	var feed;
 	
@@ -293,23 +293,34 @@
 		$('#content').empty();
 		
 		for(var index = page*number; index < page*number+number; index++) {
-			if (index < feed.Entry.length) {
-				var entry = feed.Entry[index];
+			if (index < $("item", feed).size()) {
+			
+				var entry = $("item", feed).get(index);
+				
+				var title = $("title", entry).text();
+				var link = $("link", entry).text();
+				
+				var pubDate = $("pubDate", entry).text();
+				var day = pubDate.split(" ")[1];
+				var englishMonth = pubDate.split(" ")[2];
+				var year = pubDate.split(" ")[3];
+				
+				var description = $("description", entry).text();
 
-				var itemDate = new Date(entry.Date);
-
-				var summary = entry.Summary.substr(0, 50);
+				var summary = description.substr(0, 50);
 				if (summary) {
 					summary += '&hellip;';
 				}
 
-				var mailSubject = itemDate.getDate() + ' '  + maanden[itemDate.getMonth()] + ': ' + entry.Title;
-				var mailBody = encodeURI(entry.Summary);
+				var mailSubject = day + ' '  + maanden[englishMonth] + ': ' + title;
+				var mailBody = encodeURI(description);
 
 				// TODO create add to agenda functionality, like this:
 				// http://alper.nl/cgi-bin/icsgen.py?title=Test&date=2009-4-5&location=Hier%20en%20daar
 
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + itemDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[itemDate.getMonth()] + ' ' + ('' + itemDate.getFullYear()).substr(2) + '</div> \n </div> \n <h1>' + entry.Title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + entry.Summary + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				console.log(year);
+
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 		}
@@ -351,7 +362,7 @@
 		$('#yearString').html(date.getFullYear());
 		
 		var params = {};
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
 		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
@@ -360,8 +371,6 @@
 
 		function response(obj) {
 			feed = obj.data;
-			
-			$('#jobCount').html(feed.Entry.length);
 			
 			displayPage(feed, currentPage, displayCount);
 		}
