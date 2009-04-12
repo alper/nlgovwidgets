@@ -283,6 +283,19 @@
 					'Nov': 'NOV',
 					'Dec': 'DEC'};
 	
+	var monthNumbers = {'Jan': 1,
+											'Feb': 2,
+											'Mar': 3,
+											'Apr': 4,
+											'May': 5,
+											'Jun': 6,
+											'Jul': 7,
+											'Aug': 8,
+											'Sep': 9,
+											'Oct': 10,
+											'Nov': 11,
+											'Dec': 12};
+	
 	var feed;
 	
 	var currentPage = 0;
@@ -307,6 +320,9 @@
 				
 				var description = $("description", entry).text();
 
+				var siteLink = $(entry).find("[nodeName=xCal:location]").text();
+				var location = $(entry).find("[nodeName=xCal:x-calconnect-venue-name]").text();
+
 				var summary = description.substr(0, 50);
 				if (summary) {
 					summary += '&hellip;';
@@ -315,10 +331,9 @@
 				var mailSubject = day + ' '  + maanden[englishMonth] + ': ' + title;
 				var mailBody = encodeURI(description);
 
-				// TODO create add to agenda functionality, like this:
-				// http://alper.nl/cgi-bin/icsgen.py?title=Test&date=2009-4-5&location=Hier%20en%20daar
+				var agendaLink = 'http://alper.nl/cgi-bin/icsgen.py?title=' + title + '&date=' + year + '-' + monthNumbers[englishMonth] + '-' + day + '&location=' + location;
 
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 		}
