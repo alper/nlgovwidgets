@@ -339,7 +339,13 @@
 	gadgets.util.registerOnLoadHandler(function() {
 		var prefs = new gadgets.Prefs();
 		
-		vergunningenkaart.display(prefs.getString('gemeente'));
+		if (prefs.getString('gemeente')) {
+			vergunningenkaart.display(prefs.getString('gemeente'));
+		} else {
+			// First from the list
+			vergunningenkaart.display('aalburg');
+		}
+		
 		
 		$('#gemeente').html(capitalize(prefs.getString('gemeente')));
 		

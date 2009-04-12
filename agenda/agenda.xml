@@ -318,8 +318,6 @@
 				// TODO create add to agenda functionality, like this:
 				// http://alper.nl/cgi-bin/icsgen.py?title=Test&date=2009-4-5&location=Hier%20en%20daar
 
-				console.log(year);
-
 				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
