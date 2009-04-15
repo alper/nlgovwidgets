@@ -261,18 +261,20 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var maanden = {0: 'jan',
-					1: 'feb',
-					2: 'mrt',
-					3: 'apr',
-					4: 'mei',
-					5: 'jun',
-					6: 'jul',
-					7: 'aug',
-					8: 'sep',
-					9: 'okt',
-					10: 'nov',
-					11: 'dec'};
+	var maanden = {'Jan': 'jan',
+					'Feb': 'feb',
+					'Mar': 'mrt',
+					'Apr': 'apr',
+					'May': 'mei',
+					'Jun': 'jun',
+					'Jul': 'jul',
+					'Aug': 'aug',
+					'Sep': 'sep',
+					'Oct': 'okt',
+					'Nov': 'nov',
+					'Dec': 'dec'};
+					
+	var months = {};
 	
 	var feed = null;
 	
@@ -286,20 +288,24 @@
 		$('#content').empty();
 		
 		for(var index = page*number; index  < page*number+number; index++) {
-			if (index < feed.Entry.length) {
-				var entry = feed.Entry[index];
+			if (index < $("item", feed).size()) {
+				var entry = $("item", feed).get(index);
 				
-				var summary = entry.Summary;
-			
-				var splits = summary.split(new RegExp("<strong>.+?</strong><br />"));
+				var title = $("title", entry).text();
+				var description = $("description", entry).text();
+				
+				var splits = description.split(new RegExp("<strong>.+?</strong><br />"));
 				var standPlaatsPart = splits[2];
 				var standPlaats = standPlaatsPart.split('\n')[1];
 				// TODO standplaats could use some stripping
-						
-				var entryDate = new Date(entry.Date);
-				var date = entryDate.getDate() + ' ' + maanden[entryDate.getMonth()] + ' ' + entryDate.getFullYear();
+				
+				var pubDate = $("pubDate", entry).text();
+				var dateParts = pubDate.split(' ');
+				var date = dateParts[1] + ' ' + maanden[dateParts[2]] + ' ' + dateParts[3];
+				
+				var link = $("link", entry).text();
 		
-				var html = '<a href="' + entry.Link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + entry.Title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
+				var html = '<a href="' + link + '" target="_blank"> \n <div class="contentItem"> \n <div id="contentItemTop"></div> \n <div id="contentItemMiddle"> \n <div class="externIcon"></div> \n <h1>' + title + '</h1> \n <p>' + standPlaats + ', ' + date + '</p>\n </div> \n <div id="contentItemBottom"></div> \n </div> \n </a>';
 			
 				$('#content').append(html);
 			}
@@ -318,33 +324,24 @@
 		var vakgebied = prefs.getString('vakgebied');
 		var trefwoord = prefs.getString('trefwoord');
 		
-		// TODO need to be either able to resize the window, or turn off the number of items setting
 
 		var params = {};
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.FEED;
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
 		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
 		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
 		var url = 'http://www.werkenbijdeoverheid.nl/rss/?vac_regio=' + regio + '&csro_werkdenkniveau=' + opleidingsniveau + '&csro_vakgebied=' + vakgebied + '&fun_naam=' + trefwoord;
 		
-		console.log(url);
+		// console.log(url);
 		
-		// var url = "http://alper.nl/ajax/widgetproject/dev/vacatures/data.xml";
-		// TODO as soon as the site works again put in the live URL
-
-		// TODO put in the parameters as settings
-
-		// TODO display the error message if there is one
-
 		function response(obj) {
 			feed = obj.data;
 			
-			// TODO this count always returns 25, why?
-			$('#jobCount').html(feed.Entry.length);
+			$('#jobCount').html($("item", feed).size());
 			
 			// TODO keep into account the modulo remainder
-			maxPages = feed.Entry.length / displayCount;
+			maxPages = $("item", feed).size() / displayCount;
 			
 			displayPage(feed, 0, displayCount);
 			
