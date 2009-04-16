@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Zoekdienst Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="" author="Alper Çugun" author_email="" screenshot="http://alper.nl/ajax/widgetproject/dev/bekendmakingen/screenshot.png" thumbnail="" height="325" scaling="true">
+  <ModulePrefs title="Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="" author="Alper Çugun" author_email="" screenshot="http://alper.nl/ajax/widgetproject/dev/bekendmakingen/screenshot.png" thumbnail="" height="325" scaling="false">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>
@@ -315,11 +315,7 @@
 	    }
 	}
 	var vergunningenkaart = new vergunningenkaart();
-	
-	if (gadgets.window && gadgets.window.getViewportDimensions()) {
-		vergunningenkaart.width = gadgets.window.getViewportDimensions()['width'];
-	}
-	
+		
 	function upperFirst(s) {
 		return s.substr(0, 1).toUpperCase() + s.substr(1, s.length);
 	}
@@ -336,8 +332,8 @@
 		return result;
 	}
 	
-	gadgets.util.registerOnLoadHandler(function() {
-		var prefs = new gadgets.Prefs();
+	_IG_RegisterOnloadHandler(function() {
+		var prefs = new _IG_Prefs();
 		
 		if (prefs.getString('gemeente')) {
 			vergunningenkaart.display(prefs.getString('gemeente'));
@@ -359,7 +355,7 @@
 			prefs.set('gemeente', $('#gemeenteselect').val());
 		});
 		
-		sizes = gadgets.window.adjustHeight();
+		// _IG_AdjustIFrameHeight();
 	});
 </script>
 	
