@@ -2,6 +2,7 @@
 <Module>
   <ModulePrefs title="Vacatures van Werken bij de Overheid" title_url="" description="" author="" author_email="" screenshot="" thumbnail="" height="325" scaling="true">
 		<Require feature="dynamic-height"/>
+		<Require feature="setprefs"/>
 		<Locale lang="nl" country="nl" />
   </ModulePrefs>
   
@@ -321,7 +322,20 @@
 		gadgets.window.adjustHeight();	
 	}
 	
-	gadgets.util.registerOnLoadHandler(function() {	
+	function response(obj) {
+		feed = obj.data;
+		
+		$('#jobCount').html($("item", feed).size());
+		
+		// TODO keep into account the modulo remainder
+		maxPages = $("item", feed).size() / displayCount;
+		
+		displayPage(feed, 0, displayCount);
+		
+		gadgets.window.adjustHeight();
+	}
+	
+	function doRequest() {
 		prefs = new gadgets.Prefs();
 		
 		displayCount = prefs.getInt('count');
@@ -347,23 +361,13 @@
 		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
 		var url = 'http://www.werkenbijdeoverheid.nl/rss/?vac_regio=' + regio + '&csro_werkdenkniveau=' + opleidingsniveau + '&csro_vakgebied=' + vakgebied + '&fun_naam=' + trefwoord;
 		
-		// console.log(url);
-		
-		function response(obj) {
-			feed = obj.data;
-			
-			$('#jobCount').html($("item", feed).size());
-			
-			// TODO keep into account the modulo remainder
-			maxPages = $("item", feed).size() / displayCount;
-			
-			displayPage(feed, 0, displayCount);
-			
-			gadgets.window.adjustHeight();
-		}
-		
 		gadgets.io.makeRequest(url, response, params);
-		
+	}
+	
+	
+	gadgets.util.registerOnLoadHandler(function() {
+		doRequest();
+	
 		$('#nextButton').click(function() {
 			if (currentPage+1 < maxPages) {
 				displayPage(feed, currentPage+1, displayCount);
@@ -392,7 +396,7 @@
 			prefs.set('vakgebied', $('#branchesetting').val());
 			prefs.set('trefwoord', $('#trefwoordsetting').val());
 			
-			// TODO make request again			
+			doRequest();
 			
 			$('#front').css('display', 'block');
 			$('#back').css('display', 'none');
