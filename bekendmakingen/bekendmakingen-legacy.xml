@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="" author="Alper Çugun" author_email="" screenshot="http://alper.nl/ajax/widgetproject/dev/bekendmakingen/screenshot.png" thumbnail="http://alper.nl/ajax/widgetproject/dev/bekendmakingen/thumbnail.png" height="325" scaling="false">
+  <ModulePrefs title="Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="" author="Alper Çugun" author_email="" screenshot="http://widgets.overheid20.nl/bekendmakingen/screenshot.png" thumbnail="http://widgets.overheid20.nl/bekendmakingen/thumbnail.png" height="325" scaling="false">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>
