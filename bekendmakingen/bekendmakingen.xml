@@ -275,6 +275,14 @@
 	}
 </style>
 
+<!--[if IE]>
+<style type="text/css">
+	#navigation {
+		text-align: center;
+	}
+</style>
+<![endif]-->
+
 <script type="text/javascript" charset="utf-8">
 /*
  * jQuery JavaScript Library v1.3.2
