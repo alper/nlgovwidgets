@@ -1,105 +1,98 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="Agenda widget met daarin de aankomende evenementen van Werken bij de Overheid." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/agenda/screenshot.png" thumbnail="http://widgets.overheid20.nl/agenda/thumbnail.png" height="395" scaling="true">
+  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vwa/screenshot.png" thumbnail="http://widgets.overheid20.nl/vwa/thumbnail.png" height="400" scaling="true">
 		<Locale lang="nl" country="nl" />
-		<Require feature="dynamic-height"/>
+		<Require feature="dynamic-height" />
 	</ModulePrefs>
-  
+	
+	<UserPref name="count" display_name="Aantal waarschuwingen" default_value="5" datatype="enum" >
+    <EnumValue value="3" />
+    <EnumValue value="4" />
+    <EnumValue value="5" />
+    <EnumValue value="6" />
+    <EnumValue value="7" />
+    <EnumValue value="8" />
+    <EnumValue value="9" />
+  </UserPref>
+
   <Content type="html">
   <![CDATA[ 
 <style type="text/css" media="screen">
 	body {
 		padding:0px;
 		margin:0px;	
-		font-family:Arial, Helvetica, sans-serif;
+		font-family: Arial, Helvetica, sans-serif;
 		font-size:12px;
-		background:url(http://widgets.overheid20.nl/agenda/images/bodyBack.jpg) #ffd300 repeat-x center bottom fixed;
+		background:url(http://widgets.overheid20.nl/vwa/images/bodyBack.jpg) #cfeaf1 repeat-x top left;
 	}
 
+	/* IEPNGFIX */
 	img, div {
-		behavior:url(http://widgets.overheid20.nl/agenda/scripts/iepngfix.htc);
+		behavior:url(http://widgets.overheid20.nl/vwa/scripts/iepngfix.htc);
 	}
 
 	#header {
 		width:100%;
-		height:54px;
-		background:url(http://widgets.overheid20.nl/agenda/images/headerBack.jpg) top left repeat-x;
-	}
-	#headerLogo {
-		margin:0px auto;
-		width:227px;
-		height:54px;
-		background:url(http://widgets.overheid20.nl/agenda/images/header.jpg) top left no-repeat;
+		height:44px;
+		background:url(http://widgets.overheid20.nl/vwa/images/header.jpg) #FFF no-repeat left top;
 	}
 
-	#navigation {
+	#warning {
 		width:100%;
-		height:20px;
-		background-color:#FFF;
-		color:#333;
-	}
-	#navigationItems {
-		margin:0px auto;
-		width:295px;
-	}
-	.navigationItemLeft {
-		float:left;
-		width:146px;
-		_width: 160px;
-		text-align: left;
-		height:14px;
-		background-color:#ffd300;
-		padding-top:6px;
-		padding-left:14px;
+		height:17px;
+		background-color:#dc231f;
+		color:#FFF;
 		font-weight:bold;
-	}
-	.navigationItemRight {
-		float:left;
-		height:15px;
-		width:133px;
-		text-align:center;
 		padding-top:3px;
+		_padding-bottom: 2px;
 	}
-	.navigationItemRight a {
-		color:#333;
-		text-decoration:underline;
+	#warning p {
+		padding:0px;
+		margin:0px;
+		padding-left:36px;	
 	}
+
 
 	#content {
-		margin:0px auto;
-		width:279px;
+		margin: 6px auto 0;
+		width:280px;
 		margin-top:6px;
 	}
+	
 	/* normal state */
 	#content .contentItem {
-		width:279px;
+		width:280px;
 		padding-bottom:4px;
 	}
 	#content .contentItemTop {
-		width:279px;
+		width:280px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBack.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBack.png) top center no-repeat;
 		overflow: hidden;
 	}
 	#content .contentItemMiddle {
-		width:269px;
-		_width: 279px;
-
-		min-height:32px;
-		height:auto !important;
-		height:32px;
-
-		border-left:1px solid #b9b891;
-		border-right:1px solid #b9b891;
-		padding:0px 5px 5px 3px;
+		width:270px;
+		_width: 280px;
+		
+		padding: 0px 5px 5px 3px;
 		_padding: 0px 5px 0px 3px;
-		background-color:#fff1bf;
+
+		border-left:1px solid #c7e5ed;
+		border-right:1px solid #c7e5ed;
+		
+		background-color:#fff;
+		
 		text-align: left;
+		margin-bottom: 0px !important;
+		height: auto !important;
+		overflow: hidden;
+		clear: both;
+		
 	}
 	#content .contentItemBottom {
-		width:279px;
+		width:280px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBack.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
 		overflow: hidden;
 	}
@@ -118,14 +111,22 @@
 		text-decoration:none;
 		font-weight:bold;
 	}	
-	#content p {
-		font-size:11px;
-		color:#000;
-		padding-top:2px;
+	#content h2 {
+		font-size:10px;
+		color:#2a4085;
 		margin:0px;
 		text-decoration:none;
 		font-weight:normal;
-		padding-left:45px;
+		padding-left:30px;
+	}
+	#content p {
+		font-size:11px;
+		color:#000;
+		margin:0px;
+		text-decoration:none;
+		font-weight:normal;
+		padding-left:30px;
+		padding-top:6px;
 	}
 	#content a {
 		text-decoration:none;
@@ -134,123 +135,101 @@
 	#content .dropdownIcon {
 		width:7px;
 		height:5px;
-		background:url(http://widgets.overheid20.nl/agenda/images/dropdownIcon.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/dropdownIcon.jpg) top left no-repeat;
 		float:right;
-		display: block;
 	}
-	
-	#content .dropdownButtons {
-		display: none;
-	}
-	
-	.dropdownButtons IMG {
-		border: none;
-	}
-	
-	#content .fulltext {
-		display: none;
-	}
-
-	/* date format css */
-	#content .contentItemDate {
-		width:33px;
-		height:37px;
-		border:0px;
-		margin-right:12px;
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemDateBack.png) top left no-repeat;
+	#content .contentItemIcon {
+		width:24px;
+		height:24px;
+		margin-right:6px;
+		margin-top:6px;
 		float:left;
 	}
-	#content .contentItemDate .contentItemDay {
-		width:33px;
-		height:auto;
-		color:#5e5e5e;
-		font-size:20px;
-		line-height:24px;
-		font-weight:bold;
-		padding-top:2px;
-		padding-bottom:1px;
-		text-align:center;
-	}
-	#content .contentItemDate .contentItemMonth {
-		width:33px;
-		color:#fff;
-		font-size:9px;
-		text-align:center;
-		line-height:9px;
-	}
 	/* hover state */
-	
-	.contentItem:hover .contentItemTop {
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBackHover.png) top center no-repeat;	
+	#content .contentItem:hover .contentItemTop {
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
-	
-	.contentItem:hover .contentItemMiddle {
-		border-left:1px solid #404040;
-		border-right:1px solid #404040;
+	#content .contentItem:hover .contentItemMiddle {
+		border-left:1px solid #679ebd;
+		border-right:1px solid #679ebd;
 		background-color:#fff;	
 	}
-	
-	.contentItem:hover .contentItemBottom {
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBackHover.png) top center no-repeat;	
+	#content .contentItem:hover .contentItemBottom {
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackHover.png) top center no-repeat;	
 	}
-	
-	.contentItem:hover h1 {
+	#content .contentItem:hover h1 {
 		text-decoration:underline;
 	}
-	
-	.contentItem:hover a {
+	#content .contentItem:hover a {
 		text-decoration:none;
 	}
-	
-	.contentItem:hover .dropdownIcon {
-		background:url(http://widgets.overheid20.nl/agenda/images/dropdownIconHover.jpg) top left no-repeat;
+	#content .contentItem:hover .dropdownIcon {
+		background:url(http://widgets.overheid20.nl/vwa/images/dropdownIconHover.jpg) top left no-repeat;
 	}
-	
 	/* content item active */
 	#content .contentItemActive {
-		width:279px;
+		width:280px;
 		padding-bottom:4px;
 	}
 	#content .contentItemActive .contentItemTop {
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
 	#content .contentItemActive .contentItemMiddle {
-		border-left:1px solid #404040;
-		border-right:1px solid #404040;
+		border-left:1px solid #679ebd;
+		border-right:1px solid #679ebd;
 		background-color:#fff;
 	}
 	#content .contentItemActive .contentItemBottom {
 		height:18px;
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBackActive.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 	#content .contentItemActive h1 {
 		text-decoration:underline;
 	}
+	
+	.contentFull {
+		display: none;
+	}
+	
+	.contentFull A IMG {
+		border: 0;
+	}
+	
+	.contentItemBottomActive {
+		height:18px;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackActive.png) top center no-repeat;
+	}
+
 	#content p .link {
-		background:url(http://widgets.overheid20.nl/agenda/images/externIcon.jpg) center left no-repeat;
-		border-bottom:1px solid #88887b;
+		background:url(http://widgets.overheid20.nl/vwa/images/externIcon.jpg) center left no-repeat;
+		border-bottom:1px solid #679ebd;
 		padding-left:10px;
 	}
 	#content p img {
-		padding-right:6px;
-		padding-top:8px;
-		padding-bottom:4px;
+		margin-right:6px;
+		margin-top:8px;
+		margin-bottom:4px;
 	}
 
 	#footer {
 		margin:0px auto;
-		width:279px;
-		margin-bottom:4px;
+		width:280px;
+		margin-bottom:16px;
+		margin-top:4px;
 	}
-
-	#footer .button {
+	#footer #button {
 		width:auto;
-		height:23px;
+		height:27px;	
 		float:right;
 		margin-left:4px;
-	}
-	#footer .button img {
 		border:none;
+	}
+	#footer #button img {
+		border:none
+	}
+	
+	.clearboth {
+		clear: both;
 	}
 </style>
 
@@ -278,33 +257,20 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
-	var maanden = {'Jan': 'JAN',
-					'Feb': 'FEB',
-					'Mar': 'MRT',
-					'Apr': 'APR',
-					'May': 'MEI',
-					'Jun': 'JUN',
-					'Jul': 'JUL',
-					'Aug': 'AUG',
-					'Sep': 'SEP',
-					'Oct': 'OKT',
-					'Nov': 'NOV',
-					'Dec': 'DEC'};
+	var maanden = {'Jan': 'jan',
+					'Feb': 'feb',
+					'Mar': 'mrt',
+					'Apr': 'apr',
+					'May': 'mei',
+					'Jun': 'jun',
+					'Jul': 'jul',
+					'Aug': 'aug',
+					'Sep': 'sep',
+					'Oct': 'okt',
+					'Nov': 'nov',
+					'Dec': 'dec'};
 	
-	var monthNumbers = {'Jan': 1,
-											'Feb': 2,
-											'Mar': 3,
-											'Apr': 4,
-											'May': 5,
-											'Jun': 6,
-											'Jul': 7,
-											'Aug': 8,
-											'Sep': 9,
-											'Oct': 10,
-											'Nov': 11,
-											'Dec': 12};
-	
-	var feed;
+	var feed = null;
 	
 	var currentPage = 0;
 	var displayCount = 5;
@@ -313,95 +279,88 @@
 	function displayPage(feed, page, number) {
 		$('#content').empty();
 		
-		for(var index = page*number; index < page*number+number; index++) {
+		for(var index = page*number; index  < page*number+number; index++) {
 			if (index < $("item", feed).size()) {
-			
 				var entry = $("item", feed).get(index);
 				
+				// alert($("pubDate", entry).text());
+				
 				var title = $("title", entry).text();
+				var description = $("description", entry).text();
 				var link = $("link", entry).text();
 				
-				var pubDate = $("pubDate", entry).text();
-				var day = pubDate.split(" ")[1];
-				var englishMonth = pubDate.split(" ")[2];
-				var year = pubDate.split(" ")[3];
+				var date = $("pubDate", entry).text();
+				var day = date.split(" ")[1];
+				var englishMonth = date.split(" ")[2];
+				var year = date.split(" ")[3];
+								
+				var itemDate = new Date(entry.Date);
+								
+				var icon = "http://widgets.overheid20.nl/vwa/images/importantIcon.jpg";
 				
-				var description = $("description", entry).text();
-
-				var siteLink = $(entry).find("[nodeName=xCal:location]").text();
-				var location = $(entry).find("[nodeName=xCal:x-calconnect-venue-name]").text();
-
-				var summary = description.substr(0, 50);
-				if (summary) {
-					summary += '&hellip;';
+				if ((title.match(/terug/i) && title.match(/haal/i)) || (description.match(/terug/i) && description.match(/haal/i))) {
+					icon = "http://widgets.overheid20.nl/vwa/images/terughaalIcon.jpg";
 				}
-
-				var mailSubject = day + ' '  + maanden[englishMonth] + ': ' + title;
-				var mailBody = encodeURI(description);
-
-				var agendaLink = 'http://alper.nl/cgi-bin/icsgen.py?title=' + title + '&date=' + year + '-' + monthNumbers[englishMonth] + '-' + day + '&location=' + location;
-
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://widgets.overheid20.nl/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://widgets.overheid20.nl/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				
+				var fullText = '<p class="contentFull">' + description.substr(0, 120) + '&hellip;<a href="' + link + '" target="_blank"><img src="http://widgets.overheid20.nl/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + link + '"><img src="http://widgets.overheid20.nl/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
+				
+				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + title + '</h1><h2>' + day + ' ' + maanden[englishMonth] + ' ' + year + '</h2>' + fullText + ' <div class="dropdownIcon"></div><div class="clearboth"></div></div><div class="contentItemBottom"></div></div>';
+				
 				$('#content').append(html);
 			}
 		}
-		
 		bindEvents();
 		
 		currentPage = page;
 		
-		gadgets.window.adjustHeight();
+		_IG_AdjustIFrameHeight();
 	}
 	
+	// Need to be rebinded because we're creating and recreating elements
+	// May switch to jQuery liveevent
 	function bindEvents() {
-		$('.contentItem').click(function() {			
-			if ( $(this).hasClass('contentItem') ) {
+		$('.contentItem').click(function() {
+			if ( $('.contentFull', this).css('display') == 'none' ) {
+				$('.contentFull', this).css('display', 'block');
+				
 				$('.dropdownIcon', this).css('display', 'none');
-				$('.dropdownButtons', this).css('display', 'block');
 				
-				$('.summary', this).css('display', 'none');
-				$('.fulltext', this).css('display', 'block');
-			
-				$(this).toggleClass('contentItemActive');
-				$(this).toggleClass('contentItem');
+				$('.contentItemBottom', this).toggleClass('contentItemBottomActive');
+				$('.contentItemBottom', this).toggleClass('contentItemBottom');
 			} else {
+				$('.contentFull', this).css('display', 'none');
 				$('.dropdownIcon', this).css('display', 'block');
-				$('.dropdownButtons', this).css('display', 'none');
 				
-				$('.summary', this).css('display', 'block');
-				$('.fulltext', this).css('display', 'none');
-			
-				$(this).toggleClass('contentItem');
-				$(this).toggleClass('contentItemActive');
+				$('.contentItemBottomActive', this).toggleClass('contentItemBottom');
+				$('.contentItemBottomActive', this).toggleClass('contentItemBottomActive');
 			}
-			gadgets.window.adjustHeight();
+			_IG_AdjustIFrameHeight();
 		});
 	}
 	
-	gadgets.util.registerOnLoadHandler(function() {
-		var date = new Date();
-		$('#yearString').html(date.getFullYear());
+	_IG_RegisterOnloadHandler(function() {
+		var prefs = new _IG_Prefs();
 		
-		var params = {};
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
-		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
+		if (prefs.getInt('count')) {
+			displayCount = prefs.getInt('count');
+		}
 
-		var url = "http://www.werkenbijdeoverheid.nl/rss/agenda.cfm";
-		//var url = "http://alper.nl/ajax/widgetproject/dev/agenda/data.xml";
+		var url = "http://www.vwa.nl/pls/feed/cne_content_syndication.feed?channel=10012&context=2001&flavor=rss20";
 
 		function response(obj) {
-			feed = obj.data;
+			feed = obj;
 			
-			if (feed) {
-				displayPage(feed, currentPage, displayCount);
-			} else {
-				$('#content').empty().append('<p style="text-align: left;">De gegevens konden op dit moment niet worden opgehaald.</p>');
-				gadgets.window.adjustHeight();
-			}
+			// TODO keep into account the modulo remainder
+			maxPages = $("item", feed).size() / displayCount;
+			
+			$('#content').empty();
+
+			displayPage(feed, 0, displayCount);
+			
+			_IG_AdjustIFrameHeight();
 		}
-				
-		gadgets.io.makeRequest(url, response, params);
+		
+		_IG_FetchXmlContent(url, response);
 		
 		$('#nextButton').click(function() {
 			if (currentPage+1 < maxPages) {
@@ -418,34 +377,27 @@
 			
 			return false;
 		});
-		
 	});
 </script>
 
-<center>
-	
-<a href="http://www.werkenbijdeoverheid.nl" target="_blank"><div id="header">
-  <div id="headerLogo"></div>
-</div></a>
 
-<div id="navigation">
-  <div id="navigationItems">
-    <div class="navigationItemLeft">Agenda <span id="yearString">2008/2009</span></div>
-    <div class="navigationItemRight"></div>
-  </div>
+<a href="http://www.vwa.nl" target="_blank"><div id="header"></div></a>
+
+<div id="warning">
+  <p>Waarschuwingen</p>
 </div>
 
+<center>
 <div id="content">
-	<p>Gegevens aan het ophalen&hellip;</p>
+	<p>Gegevens ophalen&hellip;</p>
 </div>
 
 <div id="footer"> <a href="#" id="nextButton">
-  <div class="button"><img src="http://widgets.overheid20.nl/agenda/images/nextBtn.png" width="78" height="23" /></div>
+  <div id="button"><img src="http://widgets.overheid20.nl/vwa/images/nextBtn.png" width="91" height="27" /></div>
   </a> <a href="#" id="previousButton">
-  <div class="button"><img src="http://widgets.overheid20.nl/agenda/images/previousBtn.png" width="63" height="23" /></div>
+  <div id="button"><img src="http://widgets.overheid20.nl/vwa/images/previousBtn.png" width="78" height="27" /></div>
   </a>
 </div>
-<p>&nbsp;</p>
 
 </center>
   ]]> 
