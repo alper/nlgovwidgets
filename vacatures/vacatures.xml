@@ -127,11 +127,13 @@
 	.navigationItemLeft {
 		float:left;
 		width:181px;
+		_width: 195px;
 		height:14px;
 		background-color:#ffd300;
 		padding-top:6px;
 		padding-left:14px;
 		font-weight:bold;
+		text-align: left;
 	}
 	.navigationItemRight {
 		float:left;
@@ -158,20 +160,24 @@
 	.contentItem .contentItemTop {
 		width:279px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/vacatures/images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vacatures/images/contentItemTopBack.png) top center no-repeat;
+		overflow: hidden;
 	}
 	.contentItem .contentItemMiddle {
 		width:264px;
+		_width: 279px;
 		height:auto;
 		border-left:1px solid #b9b891;
 		border-right:1px solid #b9b891;
 		padding:2px 5px 2px 8px;
-		background-color:#fff1bf;	
+		background-color:#fff1bf;
+		text-align: left;
 	}
  .contentItem .contentItemBottom {
 		width:279px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/vacatures/images/contentItemBottomBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vacatures/images/contentItemBottomBack.png) top center no-repeat;
+		overflow: hidden;
 	}
 	.contentItem h1 {
 		font-size:12px;
@@ -404,6 +410,8 @@
 	});
 </script>
 
+<center>
+
 	<div id="header">
 	  <div id="headerLogo"></div>
 	</div>
@@ -527,6 +535,8 @@
 	  
 		<p>&nbsp;</p>
 </div>
+
+</center>
   ]]> 
   </Content>
 </Module>
