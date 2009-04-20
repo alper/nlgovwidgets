@@ -358,7 +358,6 @@
 		var trefwoord = prefs.getString('trefwoord');
 		$('#trefwoordsetting').val(trefwoord);
 
-
 		var params = {};
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
 		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);

@@ -393,7 +393,11 @@
 		function response(obj) {
 			feed = obj.data;
 			
-			displayPage(feed, currentPage, displayCount);
+			if (feed) {
+				displayPage(feed, currentPage, displayCount);
+			} else {
+				$('#content').empty().append('<p style="text-align: left;">De gegevens konden op dit moment niet worden opgehaald.</p>');
+			}
 		}
 				
 		gadgets.io.makeRequest(url, response, params);
