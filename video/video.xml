@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Rijksoverheidvideo's" title_url="" description="" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/video/screenshot.png" thumbnail="" height="425" scaling="true">
+  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="" height="425" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="flash"/>
@@ -13,19 +13,19 @@
 	body {
 		padding:0px;
 		margin:0px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/bodyBackDark.jpg) top center no-repeat #2c4b65;
+		background:url(http://widgets.overheid20.nl/video/images/bodyBackDark.jpg) top center no-repeat #2c4b65;
 		font-family:Arial, Helvetica, sans-serif;
 	}
 
 	/* IEPNGFIX */
 	img, div {
-		behavior:url(http://alper.nl/ajax/widgetproject/dev/video/scripts/iepngfix.htc);
+		behavior:url(http://widgets.overheid20.nl/video/scripts/iepngfix.htc);
 	}
 
 	#header {
 		width:100%;
 		height:68px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/headerBack.jpg) top center no-repeat #FFF;
+		background:url(http://widgets.overheid20.nl/video/images/headerBack.jpg) top center no-repeat #FFF;
 	}
 
 	#list .navigation {
@@ -49,7 +49,7 @@
 	#content .contentItemTop {
 		width:237px;
 		height:5px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/video/images/contentItemTopBack.png) top center no-repeat;	
 	}
 	#content .contentItemMiddle {
 		width:224px;
@@ -64,7 +64,7 @@
 	#content .contentItemBottom {
 		width:237px;
 		height:5px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/contentItemBottomBack.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/video/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
 	}
 	#content h1 {
@@ -114,7 +114,7 @@
 	#video #videoTop {
 		width:285px;
 		height:4px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/videoTopBack.png) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/video/images/videoTopBack.png) top left no-repeat;
 	}
 
 	#video #videoMiddle {
@@ -133,7 +133,7 @@
 	#video #videoBottom {
 		width:285px;
 		height:31px;
-		background:url(http://alper.nl/ajax/widgetproject/dev/video/images/videoBottomBack.png) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/video/images/videoBottomBack.png) top left no-repeat;
 	}
 
 	#video #preview {
@@ -286,7 +286,7 @@
 		$('#date').html(datepart);
 		$('#quicktime').attr('href', qt);
 		
-		var s1 = new SWFObject('http://alper.nl/ajax/widgetproject/dev/video/player.swf', 'player', '270', '215', '9');
+		var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf', 'player', '270', '215', '9');
     s1.addParam('allowfullscreen','true');
     s1.addParam('allowscriptaccess','always');
     s1.addParam('flashvars','file=' + flv + '&autostart=' + autostart);
@@ -353,7 +353,7 @@
 					var display = "display: inline;"
 				}
 			
-				var html = '<a id="video_' + i + '" style="' + display + '" href="javascript:play(' + i + ', true);switchPlayer();"><div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/contentItemIcon.jpg" width="58" height="44" /></div><h1>' + $('title', this).text() + '</h1><p>' + duration + '</p></div><div class="contentItemBottom"></div></div></a>';
+				var html = '<a id="video_' + i + '" style="' + display + '" href="javascript:play(' + i + ', true);switchPlayer();"><div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="http://widgets.overheid20.nl/video/images/contentItemIcon.jpg" width="58" height="44" /></div><h1>' + $('title', this).text() + '</h1><p>' + duration + '</p></div><div class="contentItemBottom"></div></div></a>';
 				
 				$('#content').append(html);
 				numberOfVideos += 1;
@@ -373,18 +373,18 @@
 	<div id="video">
 	  <div id="videoTop"></div>
 	  <div id="videoMiddle">
-	    <div class="videoIconLeft"><a href="javascript:previous();"><img class="navigation" src="http://alper.nl/ajax/widgetproject/dev/video/images/previousBtn.jpg" width="17" height="18" /></a></div>
+	    <div class="videoIconLeft"><a href="javascript:previous();"><img class="navigation" src="http://widgets.overheid20.nl/video/images/previousBtn.jpg" width="17" height="18" /></a></div>
 
 	    <div class="videoHeaderMiddle">
 	      <h1 id="title">Rijksoverheidsvideo</h1>
 	      <p id="date">Posted Maart 2009</p>
 	    </div>
 
-	    <div class="videoIconRight"><a href="javascript:next();"><img class="navigation" src="http://alper.nl/ajax/widgetproject/dev/video/images/nextBtn.jpg" width="17" height="18" /></a></div>
+	    <div class="videoIconRight"><a href="javascript:next();"><img class="navigation" src="http://widgets.overheid20.nl/video/images/nextBtn.jpg" width="17" height="18" /></a></div>
 
 	    <div id="preview">De videospeler zal hier worden weergegeven.</div>
 	    <script type='text/javascript'>
-	    var s1 = new SWFObject('http://alper.nl/ajax/widgetproject/dev/video/player.swf','player','270','215','9');
+	    var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf','player','270','215','9');
 	    s1.addParam('allowfullscreen','true');
 	    s1.addParam('allowscriptaccess','always');
 	    s1.addParam('flashvars','file=video.flv');
@@ -393,10 +393,10 @@
 	  	</div>
 
 	  <div id="videoBottom">
-	    <div class="button"><a href="" id="quicktime"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</a></div>
+	    <div class="button"><a href="" id="quicktime"><img src="http://widgets.overheid20.nl/video/images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</a></div>
 	    <div class="button">
-				<a href="javascript:switchPlayer();"><div class="button"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/overviewBtn.png" width="78" height="21" /></div></a>
-				<!--<img src="http://alper.nl/ajax/widgetproject/dev/video/images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube-->
+				<a href="javascript:switchPlayer();"><div class="button"><img src="http://widgets.overheid20.nl/video/images/overviewBtn.png" width="78" height="21" /></div></a>
+				<!--<img src="http://widgets.overheid20.nl/video/images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube-->
 			</div>
 	  </div>
 	</div>
@@ -406,13 +406,13 @@
 </div>
 
 <div id="list">
-	<a href="#" id="upVideo"><div class="navigation"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/arrowUp.png" width="16" height="15" /></div></a>
+	<a href="#" id="upVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowUp.png" width="16" height="15" /></div></a>
 	
 	<div id="content">
 		<p>Gegevens ophalen&hellip;</p>
 	</div>
 	
-	<a href="#" id="downVideo"><div class="navigation"><img src="http://alper.nl/ajax/widgetproject/dev/video/images/arrowDown.png" width="16" height="15" /></div></a>
+	<a href="#" id="downVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowDown.png" width="16" height="15" /></div></a>
 </div>
 
   ]]> 

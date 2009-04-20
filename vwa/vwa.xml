@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/vwa/screenshot.png" thumbnail="" height="400" scaling="true">
+  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vwa/screenshot.png" thumbnail="" height="400" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height" />
 	</ModulePrefs>
@@ -23,18 +23,18 @@
 		margin:0px;	
 		font-family: Arial, Helvetica, sans-serif;
 		font-size:12px;
-		background:url(images/bodyBack.jpg) #cfeaf1 repeat-x top left;
+		background:url(http://widgets.overheid20.nl/vwa/images/bodyBack.jpg) #cfeaf1 repeat-x top left;
 	}
 
 	/* IEPNGFIX */
 	img, div {
-		behavior:url(scripts/iepngfix.htc);
+		behavior:url(http://widgets.overheid20.nl/vwa/scripts/iepngfix.htc);
 	}
 
 	#header {
 		width:100%;
 		height:44px;
-		background:url(images/header.jpg) #FFF no-repeat left top;
+		background:url(http://widgets.overheid20.nl/vwa/images/header.jpg) #FFF no-repeat left top;
 	}
 
 	#warning {
@@ -66,7 +66,7 @@
 	#content .contentItemTop {
 		width:280px;
 		height:4px;
-		background:url(images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBack.png) top center no-repeat;	
 	}
 	#content .contentItemMiddle {
 		width:270px;
@@ -83,7 +83,7 @@
 	#content .contentItemBottom {
 		width:280px;
 		height:4px;
-		background:url(images/contentItemBottomBack.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
 	}
 	#content .contentDescription {
@@ -125,7 +125,7 @@
 	#content .dropdownIcon {
 		width:7px;
 		height:5px;
-		background:url(images/dropdownIcon.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/dropdownIcon.jpg) top left no-repeat;
 		float:right;
 	}
 	#content .contentItemIcon {
@@ -137,7 +137,7 @@
 	}
 	/* hover state */
 	#content .contentItem:hover .contentItemTop {
-		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
 	#content .contentItem:hover .contentItemMiddle {
 		border-left:1px solid #679ebd;
@@ -145,7 +145,7 @@
 		background-color:#fff;	
 	}
 	#content .contentItem:hover .contentItemBottom {
-		background:url(images/contentItemBottomBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackHover.png) top center no-repeat;	
 	}
 	#content .contentItem:hover h1 {
 		text-decoration:underline;
@@ -154,7 +154,7 @@
 		text-decoration:none;
 	}
 	#content .contentItem:hover .dropdownIcon {
-		background:url(images/dropdownIconHover.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/dropdownIconHover.jpg) top left no-repeat;
 	}
 	/* content item active */
 	#content .contentItemActive {
@@ -162,7 +162,7 @@
 		padding-bottom:4px;
 	}
 	#content .contentItemActive .contentItemTop {
-		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
 	#content .contentItemActive .contentItemMiddle {
 		border-left:1px solid #679ebd;
@@ -171,7 +171,7 @@
 	}
 	#content .contentItemActive .contentItemBottom {
 		height:18px;
-		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 	#content .contentItemActive h1 {
 		text-decoration:underline;
@@ -187,11 +187,11 @@
 	
 	.contentItemBottomActive {
 		height:18px;
-		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 
 	#content p .link {
-		background:url(images/externIcon.jpg) center left no-repeat;
+		background:url(http://widgets.overheid20.nl/vwa/images/externIcon.jpg) center left no-repeat;
 		border-bottom:1px solid #679ebd;
 		padding-left:10px;
 	}
@@ -282,13 +282,13 @@
 								
 				var itemDate = new Date(entry.Date);
 								
-				var icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/importantIcon.jpg";
+				var icon = "http://widgets.overheid20.nl/vwa/images/importantIcon.jpg";
 				
 				if ((title.match(/terug/i) && title.match(/haal/i)) || (description.match(/terug/i) && description.match(/haal/i))) {
-					icon = "http://alper.nl/ajax/widgetproject/dev/vwa/images/terughaalIcon.jpg";
+					icon = "http://widgets.overheid20.nl/vwa/images/images/terughaalIcon.jpg";
 				}
 				
-				var fullText = '<p class="contentFull">' + description.substr(0, 120) + '&hellip;<a href="' + link + '" target="_blank"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + link + '"><img src="http://alper.nl/ajax/widgetproject/dev/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
+				var fullText = '<p class="contentFull">' + description.substr(0, 120) + '&hellip;<a href="' + link + '" target="_blank"><img src="http://widgets.overheid20.nl/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + link + '"><img src="http://widgets.overheid20.nl/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
 				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + title + '</h1><h2>' + day + ' ' + maanden[englishMonth] + ' ' + year + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
 				
@@ -383,9 +383,9 @@
 </div>
 
 <div id="footer"> <a href="#" id="nextButton">
-  <div id="button"><img src="images/nextBtn.png" width="91" height="27" /></div>
+  <div id="button"><img src="http://widgets.overheid20.nl/vwa/images/nextBtn.png" width="91" height="27" /></div>
   </a> <a href="#" id="previousButton">
-  <div id="button"><img src="images/previousBtn.png" width="78" height="27" /></div>
+  <div id="button"><img src="http://widgets.overheid20.nl/vwa/images/previousBtn.png" width="78" height="27" /></div>
   </a>
 </div>
   ]]> 

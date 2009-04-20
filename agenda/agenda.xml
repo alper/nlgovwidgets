@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="" description="" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://alper.nl/ajax/widgetproject/dev/agenda/screenshot.png" thumbnail="" height="395" scaling="true">
+  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="Agenda widget met daarin de aankomende evenementen van Werken bij de Overheid." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/agenda/screenshot.png" thumbnail="" height="395" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
@@ -13,23 +13,23 @@
 		margin:0px;	
 		font-family:Arial, Helvetica, sans-serif;
 		font-size:12px;
-		background:url(images/bodyBack.jpg) #ffd300 repeat-x center bottom fixed;
+		background:url(http://widgets.overheid20.nl/agenda/images/bodyBack.jpg) #ffd300 repeat-x center bottom fixed;
 	}
 
 	img, div {
-		behavior:url(scripts/iepngfix.htc);
+		behavior:url(http://widgets.overheid20.nl/agenda/scripts/iepngfix.htc);
 	}
 
 	#header {
 		width:100%;
 		height:54px;
-		background:url(images/headerBack.jpg) top left repeat-x;
+		background:url(http://widgets.overheid20.nl/agenda/images/headerBack.jpg) top left repeat-x;
 	}
 	#headerLogo {
 		margin:0px auto;
 		width:227px;
 		height:54px;
-		background:url(images/header.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/header.jpg) top left no-repeat;
 	}
 
 	#navigation {
@@ -76,7 +76,7 @@
 	#content .contentItemTop {
 		width:279px;
 		height:4px;
-		background:url(images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBack.png) top center no-repeat;	
 	}
 	#content .contentItemMiddle {
 		width:269px;
@@ -93,7 +93,7 @@
 	#content .contentItemBottom {
 		width:279px;
 		height:4px;
-		background:url(images/contentItemBottomBack.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
 	}
 	#content .contentDescription {
@@ -127,7 +127,7 @@
 	#content .dropdownIcon {
 		width:7px;
 		height:5px;
-		background:url(images/dropdownIcon.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/dropdownIcon.jpg) top left no-repeat;
 		float:right;
 	}
 	
@@ -149,7 +149,7 @@
 		height:37px;
 		border:0px;
 		margin-right:12px;
-		background:url(images/contentItemDateBack.png) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemDateBack.png) top left no-repeat;
 		float:left;
 	}
 	#content .contentItemDate .contentItemDay {
@@ -173,7 +173,7 @@
 	/* hover state */
 	
 	.contentItem:hover .contentItemTop {
-		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
 	
 	.contentItem:hover .contentItemMiddle {
@@ -183,7 +183,7 @@
 	}
 	
 	.contentItem:hover .contentItemBottom {
-		background:url(images/contentItemBottomBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBackHover.png) top center no-repeat;	
 	}
 	
 	.contentItem:hover h1 {
@@ -195,7 +195,7 @@
 	}
 	
 	.contentItem:hover .dropdownIcon {
-		background:url(images/dropdownIconHover.jpg) top left no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/dropdownIconHover.jpg) top left no-repeat;
 	}
 	
 	/* content item active */
@@ -204,7 +204,7 @@
 		padding-bottom:4px;
 	}
 	#content .contentItemActive .contentItemTop {
-		background:url(images/contentItemTopBackHover.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBackHover.png) top center no-repeat;	
 	}
 	#content .contentItemActive .contentItemMiddle {
 		border-left:1px solid #404040;
@@ -213,13 +213,13 @@
 	}
 	#content .contentItemActive .contentItemBottom {
 		height:18px;
-		background:url(images/contentItemBottomBackActive.png) top center no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBackActive.png) top center no-repeat;
 	}
 	#content .contentItemActive h1 {
 		text-decoration:underline;
 	}
 	#content p .link {
-		background:url(images/externIcon.jpg) center left no-repeat;
+		background:url(http://widgets.overheid20.nl/agenda/images/externIcon.jpg) center left no-repeat;
 		border-bottom:1px solid #88887b;
 		padding-left:10px;
 	}
@@ -333,7 +333,7 @@
 
 				var agendaLink = 'http://alper.nl/cgi-bin/icsgen.py?title=' + title + '&date=' + year + '-' + monthNumbers[englishMonth] + '-' + day + '&location=' + location;
 
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://alper.nl/ajax/widgetproject/dev/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://widgets.overheid20.nl/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://widgets.overheid20.nl/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 		}
@@ -426,9 +426,9 @@
 </div>
 
 <div id="footer"> <a href="#" id="nextButton">
-  <div class="button"><img src="images/nextBtn.png" width="78" height="23" /></div>
+  <div class="button"><img src="http://widgets.overheid20.nl/agenda/images/nextBtn.png" width="78" height="23" /></div>
   </a> <a href="#" id="previousButton">
-  <div class="button"><img src="images/previousBtn.png" width="63" height="23" /></div>
+  <div class="button"><img src="http://widgets.overheid20.nl/agenda/images/previousBtn.png" width="63" height="23" /></div>
   </a>
 </div>
 <p>&nbsp;</p>
