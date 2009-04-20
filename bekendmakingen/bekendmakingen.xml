@@ -313,12 +313,14 @@
 	    this.display = function(sPlaatsnaam){
 	        var p = escape(document.location.href);
 	        var rfr = escape(document.referrer);
-	        if (rfr == "undefined"){ 
+	        
+					if (rfr == "undefined") {
 	            rfr = "";
 	        }
-	        var sHTML    = '<iframe style="float:none;margin:2px;" frameborder="0" ';
-	        sHTML       += 'src="http://www.vergunningenkaart.nl/MapMaker/' + sPlaatsnaam +'&location=' + p + '&rfr=' + rfr + '" ';
-	        sHTML       += 'width="' + this.width + 'px" height="' + this.height + 'px"></iframe>';
+	
+	        var sHTML = '<iframe style="float:none;margin:2px;" frameborder="0" ';
+	        sHTML += 'src="http://www.vergunningenkaart.nl/MapMaker/' + sPlaatsnaam +'&location=' + p + '&rfr=' + rfr + '" ';
+	        sHTML += 'width="' + this.width + 'px" height="' + this.height + 'px"></iframe>';
 	        document.getElementById('map').innerHTML = sHTML;
 	    }
 	}
