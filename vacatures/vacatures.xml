@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Vacatures van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vacatures/screenshot.png" thumbnail="" height="325" scaling="true">
+  <ModulePrefs title="Vacatures van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="De vacatures van Werken bij de Overheid." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vacatures/screenshot.png" thumbnail="http://widgets.overheid20.nl/vacatures/thumbnail.png" height="325" scaling="true">
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>
 		<Locale lang="nl" country="nl" />

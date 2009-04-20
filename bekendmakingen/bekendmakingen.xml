@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Zoekdienst Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="" author="Alper Çugun" author_email="" screenshot="http://widgets.overheid20.nl/bekendmakingen/screenshot.png" thumbnail="http://widgets.overheid20.nl/bekendmakingen/thumbnail.png" height="325" scaling="true">
+  <ModulePrefs title="Zoekdienst Bekendmakingen" title_url="http://www.overheid.nl/overheidsinformatie/bekendmakingen" description="Widget die de gegevens van de Bekendmakingen van Overheid.nl weergeeft zoals herbruikbaar gemaakt door Geostart op Vergunningenkaart.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/bekendmakingen/screenshot.png" thumbnail="http://widgets.overheid20.nl/bekendmakingen/thumbnail.png" height="325" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="Agenda widget met daarin de aankomende evenementen van Werken bij de Overheid." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/agenda/screenshot.png" thumbnail="" height="395" scaling="true">
+  <ModulePrefs title="Agenda van Werken bij de Overheid" title_url="http://www.werkenbijdeoverheid.nl/" description="Agenda widget met daarin de aankomende evenementen van Werken bij de Overheid." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/agenda/screenshot.png" thumbnail="http://widgets.overheid20.nl/agenda/thumbnail.png" height="395" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>

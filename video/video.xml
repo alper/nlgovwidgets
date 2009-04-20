@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="" height="425" scaling="true">
+  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="http://widgets.overheid20.nl/video/thumbnail.png" height="425" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 		<Require feature="flash"/>
 	</ModulePrefs>
   
   <Content type="html">
-  <![CDATA[ 
-
+  <![CDATA[
 <style type="text/css" media="screen">
 	body {
 		padding:0px;

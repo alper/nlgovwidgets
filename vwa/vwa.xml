@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vwa/screenshot.png" thumbnail="" height="400" scaling="true">
+  <ModulePrefs title="VWA" title_url="http://www.vwa.nl" description="Waarschuwingen van de Voedsel- en Warenauthoriteit" author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/vwa/screenshot.png" thumbnail="http://widgets.overheid20.nl/vwa/thumbnail.png" height="400" scaling="true">
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height" />
 	</ModulePrefs>
