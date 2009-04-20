@@ -44,6 +44,7 @@
 		color:#FFF;
 		font-weight:bold;
 		padding-top:3px;
+		_padding-bottom: 2px;
 	}
 	#warning p {
 		padding:0px;
@@ -66,25 +67,34 @@
 	#content .contentItemTop {
 		width:280px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/vwa/images/contentItemTopBack.png) top center no-repeat;
+		overflow: hidden;
 	}
 	#content .contentItemMiddle {
 		width:270px;
-
-		min-height:32px;
-		height:auto !important;
-		height:32px;
+		_width: 280px;
+		
+		padding: 0px 5px 5px 3px;
+		_padding: 0px 5px 0px 3px;
 
 		border-left:1px solid #c7e5ed;
 		border-right:1px solid #c7e5ed;
-		padding:0px 5px 5px 3px;
+		
 		background-color:#fff;
+		
+		text-align: left;
+		margin-bottom: 0px !important;
+		height: auto !important;
+		overflow: hidden;
+		clear: both;
+		
 	}
 	#content .contentItemBottom {
 		width:280px;
 		height:4px;
 		background:url(http://widgets.overheid20.nl/vwa/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
+		overflow: hidden;
 	}
 	#content .contentDescription {
 		width:220px;
@@ -196,9 +206,9 @@
 		padding-left:10px;
 	}
 	#content p img {
-		padding-right:6px;
-		padding-top:8px;
-		padding-bottom:4px;
+		margin-right:6px;
+		margin-top:8px;
+		margin-bottom:4px;
 	}
 
 	#footer {
@@ -216,6 +226,10 @@
 	}
 	#footer #button img {
 		border:none
+	}
+	
+	.clearboth {
+		clear: both;
 	}
 </style>
 
@@ -285,12 +299,12 @@
 				var icon = "http://widgets.overheid20.nl/vwa/images/importantIcon.jpg";
 				
 				if ((title.match(/terug/i) && title.match(/haal/i)) || (description.match(/terug/i) && description.match(/haal/i))) {
-					icon = "http://widgets.overheid20.nl/vwa/images/images/terughaalIcon.jpg";
+					icon = "http://widgets.overheid20.nl/vwa/images/terughaalIcon.jpg";
 				}
 				
 				var fullText = '<p class="contentFull">' + description.substr(0, 120) + '&hellip;<a href="' + link + '" target="_blank"><img src="http://widgets.overheid20.nl/vwa/images/leesBerichtBtn.jpg" width="140" height="19" /></a> <a href="mailto:?subject=' + title + '&body=Hallo,%0A%0AIk dacht dat je deze waarschuwing van de VWA wel interessant zou vinden.%0A%0AZie: ' + link + '"><img src="http://widgets.overheid20.nl/vwa/images/mailBtn.jpg" width="68" height="19" /></a></p>'
 				
-				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + title + '</h1><h2>' + day + ' ' + maanden[englishMonth] + ' ' + year + '</h2>' + fullText + ' <div class="dropdownIcon"></div></div><div class="contentItemBottom"></div></div>';
+				var html = '<div class="contentItem"><div class="contentItemTop"></div><div class="contentItemMiddle"><div class="contentItemIcon"><img src="' + icon + '" width="24" height="24"></div><h1>' + title + '</h1><h2>' + day + ' ' + maanden[englishMonth] + ' ' + year + '</h2>' + fullText + ' <div class="dropdownIcon"></div><div class="clearboth"></div></div><div class="contentItemBottom"></div></div>';
 				
 				$('#content').append(html);
 			}
@@ -378,6 +392,7 @@
   <p>Waarschuwingen</p>
 </div>
 
+<center>
 <div id="content">
 	<p>Gegevens ophalen&hellip;</p>
 </div>
@@ -388,6 +403,8 @@
   <div id="button"><img src="http://widgets.overheid20.nl/vwa/images/previousBtn.png" width="78" height="27" /></div>
   </a>
 </div>
+
+</center>
   ]]> 
   </Content>
 </Module>
