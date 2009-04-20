@@ -45,6 +45,8 @@
 	.navigationItemLeft {
 		float:left;
 		width:146px;
+		_width: 160px;
+		text-align: left;
 		height:14px;
 		background-color:#ffd300;
 		padding-top:6px;
@@ -76,10 +78,12 @@
 	#content .contentItemTop {
 		width:279px;
 		height:4px;
-		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBack.png) top center no-repeat;	
+		background:url(http://widgets.overheid20.nl/agenda/images/contentItemTopBack.png) top center no-repeat;
+		overflow: hidden;
 	}
 	#content .contentItemMiddle {
 		width:269px;
+		_width: 279px;
 
 		min-height:32px;
 		height:auto !important;
@@ -88,13 +92,16 @@
 		border-left:1px solid #b9b891;
 		border-right:1px solid #b9b891;
 		padding:0px 5px 5px 3px;
+		_padding: 0px 5px 0px 3px;
 		background-color:#fff1bf;
+		text-align: left;
 	}
 	#content .contentItemBottom {
 		width:279px;
 		height:4px;
 		background:url(http://widgets.overheid20.nl/agenda/images/contentItemBottomBack.png) top center no-repeat;
 		clear:both;
+		overflow: hidden;
 	}
 	#content .contentDescription {
 		width:220px;
@@ -129,6 +136,7 @@
 		height:5px;
 		background:url(http://widgets.overheid20.nl/agenda/images/dropdownIcon.jpg) top left no-repeat;
 		float:right;
+		display: block;
 	}
 	
 	#content .dropdownButtons {
@@ -409,7 +417,8 @@
 	});
 </script>
 
-
+<center>
+	
 <a href="http://www.werkenbijdeoverheid.nl" target="_blank"><div id="header">
   <div id="headerLogo"></div>
 </div></a>
@@ -432,6 +441,8 @@
   </a>
 </div>
 <p>&nbsp;</p>
+
+</center>
   ]]> 
   </Content>
 </Module>
