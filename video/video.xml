@@ -49,9 +49,12 @@
 		width:237px;
 		height:5px;
 		background:url(http://widgets.overheid20.nl/video/images/contentItemTopBack.png) top center no-repeat;	
+		overflow: hidden;
 	}
 	#content .contentItemMiddle {
 		width:224px;
+		_width: 237px;
+		text-align: left;
 
 		min-height:44px;
 		height:auto !important;
@@ -118,6 +121,8 @@
 
 	#video #videoMiddle {
 		width:273px;
+		_width: 285px;
+		text-align: left;
 
 		min-height:32px;
 		height:auto !important;
@@ -255,6 +260,7 @@
 			$('#player').css('display', 'block');
 			$('#list').css('display', 'none');		
 		}
+		gadgets.window.adjustHeight();
 	}
 	
 	var data = null;
@@ -304,7 +310,7 @@
 	
 	gadgets.util.registerOnLoadHandler(function() {
 		$('#upVideo').click(function() {
-			console.log('start pointer ' + startPointer);
+			// console.log('start pointer ' + startPointer);
 			
 			if (startPointer > 0) {
 				$('#video_' + (startPointer-1)).css('display', 'inline');
@@ -315,7 +321,7 @@
 		});
 		
 		$('#downVideo').click(function() {
-			console.log('start pointer ' + startPointer + ' number ' + numberOfVideos);
+			// console.log('start pointer ' + startPointer + ' number ' + numberOfVideos);
 			
 			if (startPointer < numberOfVideos - numberToShow) {
 				$('#video_' + startPointer).css('display', 'none');
@@ -365,7 +371,7 @@
 	});
 </script>
 
-
+<center>
 <div id="header"></div>
 
 <div id="player">
@@ -393,8 +399,7 @@
 
 	  <div id="videoBottom">
 	    <div class="button"><a href="" id="quicktime"><img src="http://widgets.overheid20.nl/video/images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</a></div>
-	    <div class="button">
-				<a href="javascript:switchPlayer();"><div class="button"><img src="http://widgets.overheid20.nl/video/images/overviewBtn.png" width="78" height="21" /></div></a>
+				<div class="button"><a href="javascript:switchPlayer();"><img src="http://widgets.overheid20.nl/video/images/overviewBtn.png" width="78" height="21" /></a></div>
 				<!--<img src="http://widgets.overheid20.nl/video/images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube-->
 			</div>
 	  </div>
@@ -413,6 +418,7 @@
 	
 	<a href="#" id="downVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowDown.png" width="16" height="15" /></div></a>
 </div>
+</center>
 
   ]]> 
   </Content>
