@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="http://widgets.overheid20.nl/video/thumbnail.png" height="425" scaling="true">
+  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="http://widgets.overheid20.nl/video/thumbnail.png" height="352">
 		<Locale lang="nl" country="nl" />
-		<Require feature="dynamic-height"/>
 		<Require feature="flash"/>
 	</ModulePrefs>
   
@@ -206,9 +205,13 @@
 	#footer .button img {
 		border:none;
 	}
-	
+		
 	#list {
 		display: none;
+	}
+	
+	#list, #player {
+		text-align: center;
 	}
 	
 	.navigation, .navigation IMG {
@@ -252,14 +255,22 @@
 </script>
 
 <script type="text/javascript" charset="utf-8">
+	var playerVisible = true;
+	
 	function switchPlayer() {
-		if ($('#player').css('display') == 'block') {
-			$('#player').css('display', 'none');
+		if (playerVisible) {
 			$('#list').css('display', 'block');
+			$('#player').css('display', 'none');
+			
+			playerVisible = false;
 		} else {
+			$('#list').css('display', 'none');
 			$('#player').css('display', 'block');
-			$('#list').css('display', 'none');		
+			
+			playerVisible = true;
 		}
+		
+		_IG_AdjustIFrameHeight();
 	}
 	
 	var data = null;
@@ -290,11 +301,20 @@
 		$('#date').html(datepart);
 		$('#quicktime').attr('href', qt);
 		
+		/*
 		var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf', 'player', '270', '215', '9');
     s1.addParam('allowfullscreen','true');
     s1.addParam('allowscriptaccess','always');
     s1.addParam('flashvars','file=' + flv + '&autostart=' + autostart);
     s1.write('preview');
+		*/
+		
+		var params = {'width': '270',
+									'height': '215',
+									'allowfullscreen': 'true', 
+									'allowscriptaccess': 'always', 
+									'flashvars': 'file=' + flv + '&autostart=' + autostart};
+		_IG_EmbedFlash('http://widgets.overheid20.nl/video/player.swf', 'preview', params);
 		
 		currentVideo = index;
 	}
@@ -308,6 +328,11 @@
 	}
 	
 	_IG_RegisterOnloadHandler(function() {
+		$('#switchPlayer').click(function() {
+			switchPlayer();
+			return false;
+		});
+	
 		$('#upVideo').click(function() {
 			// console.log('start pointer ' + startPointer);
 			
@@ -367,7 +392,8 @@
 	});
 </script>
 
-<center>
+<div>
+
 <div id="header"></div>
 
 <div id="player">
@@ -384,18 +410,11 @@
 	    <div class="videoIconRight"><a href="javascript:next();"><img class="navigation" src="http://widgets.overheid20.nl/video/images/nextBtn.jpg" width="17" height="18" /></a></div>
 
 	    <div id="preview">De videospeler zal hier worden weergegeven.</div>
-	    <script type='text/javascript'>
-	    var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf','player','270','215','9');
-	    s1.addParam('allowfullscreen','true');
-	    s1.addParam('allowscriptaccess','always');
-	    s1.addParam('flashvars','file=video.flv');
-	    s1.write('preview');
-	    </script>
-	  	</div>
+	  </div>
 
 	  <div id="videoBottom">
 	    <div class="button"><a href="" id="quicktime"><img src="http://widgets.overheid20.nl/video/images/quickTimeBtn.jpg" width="21" height="20" /> download de Quicktime</a></div>
-				<div class="button"><a href="javascript:switchPlayer();"><img src="http://widgets.overheid20.nl/video/images/overviewBtn.png" width="78" height="21" /></a></div>
+				<div class="button"><a id="switchPlayer" href="#"><img src="http://widgets.overheid20.nl/video/images/overviewBtn.png" width="78" height="21" /></a></div>
 				<!--<img src="http://widgets.overheid20.nl/video/images/youTubeBtn.jpg" width="47" height="20" /> bekijk op YouTube-->
 			</div>
 	  </div>
@@ -414,8 +433,9 @@
 	
 	<a href="#" id="downVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowDown.png" width="16" height="15" /></div></a>
 </div>
-</center>
 
+
+</div>
   ]]> 
   </Content>
 </Module>

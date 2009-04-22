@@ -392,6 +392,8 @@
 		$('#instellingen').click(function() {
 			$('#front').css('display', 'none');
 			$('#back').css('display', 'block');
+			
+			return false;
 		});
 		
 		$('#savesettings').click(function() {			
@@ -405,6 +407,10 @@
 			
 			$('#front').css('display', 'block');
 			$('#back').css('display', 'none');
+			
+			gadgets.window.adjustHeight();
+			
+			return false;
 		});
 	});
 </script>
