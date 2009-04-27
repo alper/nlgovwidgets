@@ -325,11 +325,16 @@
 	  }
 		currentPage = page;
 			
-		gadgets.window.adjustHeight();	
+		_IG_AdjustIFrameHeight();
 	}
 	
-	function response(obj) {
-		feed = obj.data;
+	function response(obj) {		
+		feed = obj;
+		
+		if (obj == null || typeof(response) != "object" || response.firstChild == null)
+			alert('bad response');
+		
+		alert(obj);
 		
 		$('#jobCount').html($("item", feed).size());
 		
@@ -338,11 +343,11 @@
 		
 		displayPage(feed, 0, displayCount);
 		
-		gadgets.window.adjustHeight();
+		_IG_AdjustIFrameHeight();
 	}
 	
 	function doRequest() {
-		prefs = new gadgets.Prefs();
+		prefs = new _IG_Prefs();
 		
 		displayCount = prefs.getInt('count');
 		
@@ -358,19 +363,15 @@
 		var trefwoord = prefs.getString('trefwoord');
 		$('#trefwoordsetting').val(trefwoord);
 
-		var params = {};
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-		params[gadgets.io.RequestParameters.NUM_ENTRIES] = new Number(100);
-		params[gadgets.io.RequestParameters.GET_SUMMARIES] = new Boolean(true);
 
 		// var url = 'http://alper.nl/ajax/widgetproject/iGoogle/feed.xml';
 		var url = 'http://www.werkenbijdeoverheid.nl/rss/?vac_regio=' + regio + '&csro_werkdenkniveau=' + opleidingsniveau + '&csro_vakgebied=' + vakgebied + '&fun_naam=' + trefwoord;
 		
-		gadgets.io.makeRequest(url, response, params);
+		_IG_FetchXmlContent(url, response);
 	}
 	
 	
-	gadgets.util.registerOnLoadHandler(function() {
+	_IG_RegisterOnloadHandler(function() {	
 		doRequest();
 	
 		$('#nextButton').click(function() {
@@ -408,7 +409,7 @@
 			$('#front').css('display', 'block');
 			$('#back').css('display', 'none');
 			
-			gadgets.window.adjustHeight();
+			_IG_AdjustIFrameHeight();
 			
 			return false;
 		});
