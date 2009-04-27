@@ -330,12 +330,7 @@
 	
 	function response(obj) {		
 		feed = obj;
-		
-		if (obj == null || typeof(response) != "object" || response.firstChild == null)
-			alert('bad response');
-		
-		alert(obj);
-		
+				
 		$('#jobCount').html($("item", feed).size());
 		
 		// TODO keep into account the modulo remainder
