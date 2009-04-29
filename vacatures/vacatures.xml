@@ -295,9 +295,7 @@
 	
 	var prefs = null;
 	
-	function displayPage(feed, page, number) {
-		// console.log("currentPage: " + currentPage + ", displayCount: " + displayCount + ", maxPages: " + maxPages + ", page: " + page);
-		
+	function displayPage(feed, page, number) {		
 		$('#content').empty();
 		
 		for(var index = page*number; index  < page*number+number; index++) {

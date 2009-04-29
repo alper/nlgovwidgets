@@ -298,6 +298,7 @@
 								
 				var icon = "http://widgets.overheid20.nl/vwa/images/importantIcon.jpg";
 				
+				// If we can match 'terug' in de item, it's a terughaalIcon
 				if ((title.match(/terug/i) && title.match(/haal/i)) || (description.match(/terug/i) && description.match(/haal/i))) {
 					icon = "http://widgets.overheid20.nl/vwa/images/terughaalIcon.jpg";
 				}

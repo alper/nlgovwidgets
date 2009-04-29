@@ -393,6 +393,8 @@
 		function response(obj) {
 			feed = obj.data;
 			
+			maxPages = $("item", feed).size() / displayCount;
+			
 			if (feed) {
 				displayPage(feed, currentPage, displayCount);
 			} else {
