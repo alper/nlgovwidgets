@@ -5,6 +5,11 @@
 		<Require feature="dynamic-height" />
 	</ModulePrefs>
 	
+	<!-- Legacy version of the Google Gadget for the current version of iGoogle. 
+			Should not need to be maintained and can be phased out when iGoogle is upgraded
+			to the gadgets.* API.
+	-->
+	
 	<UserPref name="count" display_name="Aantal waarschuwingen" default_value="5" datatype="enum" >
     <EnumValue value="3" />
     <EnumValue value="4" />

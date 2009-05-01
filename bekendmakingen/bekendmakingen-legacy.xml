@@ -5,6 +5,11 @@
 		<Require feature="dynamic-height"/>
 		<Require feature="setprefs"/>
 	</ModulePrefs>
+	
+	<!-- Legacy version of the Google Gadget for the current version of iGoogle. 
+			Should not need to be maintained and can be phased out when iGoogle is upgraded
+			to the gadgets.* API.
+	-->
   
 	<UserPref name="gemeente" display_name="Gemeente" default_value="franeker" datatype="enum">
 		<EnumValue value="aalburg" display_value="Aalburg"/>

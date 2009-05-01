@@ -4,6 +4,11 @@
 		<Locale lang="nl" country="nl" />
 		<Require feature="dynamic-height"/>
 	</ModulePrefs>
+	
+	<!-- Legacy version of the Google Gadget for the current version of iGoogle. 
+			Should not need to be maintained and can be phased out when iGoogle is upgraded
+			to the gadgets.* API.
+	-->
   
   <Content type="html">
   <![CDATA[ 
