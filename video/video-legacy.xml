@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="http://widgets.overheid20.nl/video/thumbnail.png" height="352">
+  <ModulePrefs title="Rijksoverheidvideo's" title_url="http://www.regering.nl/Actueel/Video_s" description="Video's zoals gepubliceerd door de Rijksoverheid op Regering.nl." author="Alper Çugun" author_email="widgets@alper.nl" screenshot="http://widgets.overheid20.nl/video/screenshot.png" thumbnail="http://widgets.overheid20.nl/video/thumbnail.png" height="375">
 		<Locale lang="nl" country="nl" />
 		<Require feature="flash"/>
 		<Require feature="dynamic-height"/>
@@ -282,7 +282,7 @@
 	var data = null;
 	var currentVideo = null;
 	
-	var numberToShow = 4;
+	var numberToShow = 3;
 	var numberOfVideos = 0;
 	var startPointer = 0;
 	
@@ -308,7 +308,7 @@
 		$('#quicktime').attr('href', qt);
 		
 		/*
-		var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf', 'player', '270', '215', '9');
+		var s1 = new SWFObject('http://widgets.overheid20.nl/video/player.swf', 'player', '270', '171', '9');
     s1.addParam('allowfullscreen','true');
     s1.addParam('allowscriptaccess','always');
     s1.addParam('flashvars','file=' + flv + '&autostart=' + autostart);
@@ -425,21 +425,22 @@
 			</div>
 	  </div>
 	</div>
+	
+
+	<div id="list">
+		<a href="#" id="upVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowUp.png" width="16" height="15" /></div></a>
+
+		<div id="content">
+			<p>Gegevens ophalen&hellip;</p>
+		</div>
+
+		<a href="#" id="downVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowDown.png" width="16" height="15" /></div></a>
+	</div>
+
 
 	<div id="footer">
 	</div>
 </div>
-
-<div id="list">
-	<a href="#" id="upVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowUp.png" width="16" height="15" /></div></a>
-	
-	<div id="content">
-		<p>Gegevens ophalen&hellip;</p>
-	</div>
-	
-	<a href="#" id="downVideo"><div class="navigation"><img src="http://widgets.overheid20.nl/video/images/arrowDown.png" width="16" height="15" /></div></a>
-</div>
-
 
 </div>
   ]]> 
