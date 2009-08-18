@@ -311,7 +311,6 @@
 				var splits = description.split(new RegExp("<strong>.+?</strong><br />"));
 				var standPlaatsPart = splits[2];
 				var standPlaats = standPlaatsPart.split('\n')[1];
-				// TODO standplaats could use some stripping
 				
 				var pubDate = $("pubDate", entry).text();
 				var dateParts = pubDate.split(' ');
@@ -345,9 +344,9 @@
 	function doRequest() {
 		prefs = new gadgets.Prefs();
 		
-                // TODO FIXME if prefs is not initialized, prefs returns 0
-                // Fix it here and in -legacy.xml to check if thes returns
-                // zero to reset it to the default displaycount.
+    // TODO FIXME if prefs is not initialized, prefs returns 0
+    // Fix it here and in -legacy.xml to check if thes returns
+    // zero to reset it to the default displaycount.
 		displayCount = prefs.getInt('count');
 		
 		var regio = prefs.getString('regio');
