@@ -281,18 +281,18 @@
 
 <script type="text/javascript" charset="utf-8">
 	<!--
-	var maanden = {'Jan': 'JAN',
-					'Feb': 'FEB',
-					'Mar': 'MRT',
-					'Apr': 'APR',
-					'May': 'MEI',
-					'Jun': 'JUN',
-					'Jul': 'JUL',
-					'Aug': 'AUG',
-					'Sep': 'SEP',
-					'Oct': 'OKT',
-					'Nov': 'NOV',
-					'Dec': 'DEC'};
+	var maanden = {'0': 'JAN',
+					'1': 'FEB',
+					'2': 'MRT',
+					'3': 'APR',
+					'4': 'MEI',
+					'5': 'JUN',
+					'6': 'JUL',
+					'7': 'AUG',
+					'8': 'SEP',
+					'9': 'OKT',
+					'10': 'NOV',
+					'11': 'DEC'};
 	
 	var monthNumbers = {'Jan': 1,
 											'Feb': 2,
@@ -314,37 +314,66 @@
 	var maxPages = 10;
 	
 	function displayPage(feed, page, number) {
-		$('#content').empty();
+		var entries = [];
+
+		// First parse all events and put that in an array
+		var items = $("item", feed).get()
+		
+		for(var allCounter=0; allCounter < items.length; allCounter++) {
+			var entry = items[allCounter];
+			
+			var parsedEntry = {}
+			
+			parsedEntry["title"] = $("title", entry).text();
+			parsedEntry["link"] = $("link", entry).text();
+			
+			var pubDate = $("pubDate", entry).text();
+			
+			parsedEntry["date"] = new Date();
+			parsedEntry["date"].setFullYear(parseInt(pubDate.split(" ")[3]), monthNumbers[pubDate.split(" ")[2]], parseInt(pubDate.split(" ")[1]));
+			
+			parsedEntry["description"] = $("description", entry).text();
+
+			parsedEntry["siteLink"] = $(entry).find("[nodeName=xCal:location]").text();
+			parsedEntry["location"] = $(entry).find("[nodeName=xCal:x-calconnect-venue-name]").text();
+
+			entries.push(parsedEntry);
+		}
+		
+		// Now filter events on dates starting from today
+		entries.reverse();
+		var filteredEvents = [];
+		var today = new Date();
+		
+		for(var entriesKey in entries) {
+			if (entries[entriesKey]["date"] >= today) {
+				filteredEvents.push(entries[entriesKey]);
+			}
+		}
+		
+		if (page*number+1 < filteredEvents.length) {
+			$('#content').empty();
+		}
+		// TODO need to make the page number not advance if there is no more content FIXLATER
 		
 		for(var index = page*number; index < page*number+number; index++) {
-			if (index < $("item", feed).size()) {
+			if (index < filteredEvents.length) {
 			
-				var entry = $("item", feed).get(index);
-				
-				var title = $("title", entry).text();
-				var link = $("link", entry).text();
-				
-				var pubDate = $("pubDate", entry).text();
-				var day = pubDate.split(" ")[1];
-				var englishMonth = pubDate.split(" ")[2];
-				var year = pubDate.split(" ")[3];
-				
-				var description = $("description", entry).text();
-
-				var siteLink = $(entry).find("[nodeName=xCal:location]").text();
-				var location = $(entry).find("[nodeName=xCal:x-calconnect-venue-name]").text();
-
-				var summary = description.substr(0, 50);
+				var event = filteredEvents[index];
+			
+				var summary = event["description"].substr(0, 50);
 				if (summary) {
 					summary += '&hellip;';
 				}
+				
+				var eventDate = event['date'];
+				var mailSubject = eventDate.getDate() + ' '  + maanden[eventDate.getMonth()] + ': ' + event["title"];
+				var mailBody = encodeURI(event["description"]);
 
-				var mailSubject = day + ' '  + maanden[englishMonth] + ': ' + title;
-				var mailBody = encodeURI(description);
+				var agendaLink = 'http://alper.nl/cgi-bin/icsgen.py?title=' + event["title"] + '&date=' + eventDate.getYear() + '-' + (eventDate.getMonth()+1) + '-' + eventDate.getDate() + '&location=' + event["location"];
+				
+				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + eventDate.getDate() + '</div> \n <div class="contentItemMonth">' + maanden[eventDate.getMonth()] + ' ' + (eventDate.getYear() + '').substr(1) + '</div> \n </div> \n <h1>' + event["title"] + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + event["description"] + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://widgets.overheid20.nl/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://widgets.overheid20.nl/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 
-				var agendaLink = 'http://alper.nl/cgi-bin/icsgen.py?title=' + title + '&date=' + year + '-' + monthNumbers[englishMonth] + '-' + day + '&location=' + location;
-
-				var html = '<div class="contentItem"> \n <div class="contentItemTop"></div> \n <div class="contentItemMiddle"> \n <div class="contentItemDate"> \n <div class="contentItemDay">' + day + '</div> \n <div class="contentItemMonth">' + maanden[englishMonth] + ' ' + year.substr(2) + '</div> \n </div> \n <h1>' + title + '</h1> \n <p class="summary">' + summary + '</p> <p class="fulltext">' + description + '</p> \n <p class="dropdownButtons"> <a href="' + agendaLink + '"><img width="91" height="19" src="http://widgets.overheid20.nl/agenda/images/agendaBtn.jpg"/></a> <a href="mailto:?subject=' + mailSubject + '&body=' + mailBody + '"><img width="66" height="19" src="http://widgets.overheid20.nl/agenda/images/mailBtn.jpg"/></a> </p> \n <div class="dropdownIcon"></div> \n </div> \n <div class="contentItemBottom"></div> \n </div>';
 				$('#content').append(html);
 			}
 		}
