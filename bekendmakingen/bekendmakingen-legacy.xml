@@ -373,7 +373,7 @@
 </script>
 	
 <div id="navigation">
-	<div id="dropdown"><p>Gemeente
+	<div id="dropdown"><p style="padding: 0;">Gemeente
 		<select id="gemeenteselect" style="width: 10em; height: 0.5em;">
 			<option value="aalburg">Aalburg</option>
 			<option value="aalten">Aalten</option>
