@@ -315,7 +315,6 @@
 				var splits = description.split(new RegExp("<strong>.+?</strong><br />"));
 				var standPlaatsPart = splits[2];
 				var standPlaats = standPlaatsPart.split('\n')[1];
-				// TODO standplaats could use some stripping
 				
 				var pubDate = $("pubDate", entry).text();
 				var dateParts = pubDate.split(' ');
@@ -349,7 +348,9 @@
 	function doRequest() {
 		prefs = new _IG_Prefs();
 		
-		displayCount = prefs.getInt('count');
+		if (prefs.getInt('count') != 0) {
+			displayCount = prefs.getInt('count');
+		}
 		
 		var regio = prefs.getString('regio');
 		$('#regiosetting').val(regio);
