@@ -395,6 +395,8 @@
 			$('#front').css('display', 'none');
 			$('#back').css('display', 'block');
 			
+			_IG_AdjustIFrameHeight();
+			
 			return false;
 		});
 		
